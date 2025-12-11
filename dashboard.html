@@ -486,26 +486,6 @@
       </div>
     </main>
 
-    <script>
-      // Fitur Jam Real-time Sederhana
-      function updateClock() {
-        const now = new Date();
-        const options = {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        };
-        document.getElementById("liveClock").textContent = now
-          .toLocaleDateString("en-GB", options)
-          .replace(",", " •");
-      }
-
-      setInterval(updateClock, 1000);
-      updateClock(); // Jalankan langsung saat load
-    </script>
+    <script src="js/script.js"></script>
   </body>
 </html>
