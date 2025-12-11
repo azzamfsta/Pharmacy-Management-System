@@ -114,9 +114,37 @@
             <h4 class="text-sm font-semibold">Subash</h4>
             <p class="text-xs text-yellow-400">Super Admin</p>
           </div>
-          <i
-            class="fa-solid fa-ellipsis-vertical text-gray-400 cursor-pointer"
-          ></i>
+          <div class="relative">
+            <button
+              type="button"
+              class="p-2 rounded hover:bg-gray-800 focus:outline-none"
+              data-dropdown-toggle="userMenuDropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="fa-solid fa-ellipsis-vertical text-gray-400"></i>
+            </button>
+            <div
+              id="userMenuDropdown"
+              data-dropdown
+              class="hidden absolute right-0 top-10 w-44 bg-white text-gray-700 rounded-lg shadow-lg border border-gray-100 z-20"
+            >
+              <a
+                href="#"
+                class="flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-50"
+              >
+                <i class="fa-regular fa-user text-gray-500"></i>
+                My Profile
+              </a>
+              <a
+                href="#"
+                class="flex items-center gap-2 px-4 py-3 text-sm text-red-500 hover:bg-gray-50"
+              >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </a>
+            </div>
+          </div>
         </div>
 
         <!-- Navigation Menu -->
@@ -133,28 +161,58 @@
           </a>
 
           <!-- Inventory (Dropdown) -->
-          <a
-            href="#"
-            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition group"
-          >
-            <div class="flex items-center gap-3">
-              <i class="fa-solid fa-boxes-stacked w-5"></i>
-              <span>Inventory</span>
+          <div class="relative">
+            <button
+              type="button"
+              class="w-full flex items-center justify-between px-6 py-3 text-left text-gray-400 hover:bg-gray-800 hover:text-white transition"
+              data-dropdown-toggle="inventoryDropdown"
+            >
+              <span class="flex items-center gap-3">
+                <i class="fa-solid fa-boxes-stacked w-5"></i>
+                Inventory
+              </span>
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div
+              id="inventoryDropdown"
+              data-dropdown
+              class="hidden flex flex-col bg-gray-900 text-gray-200 text-sm"
+            >
+              <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+                >Inventory List</a
+              >
+              <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+                >Add Medicine</a
+              >
             </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
-          </a>
+          </div>
 
           <!-- Reports (Dropdown) -->
-          <a
-            href="#"
-            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-          >
-            <div class="flex items-center gap-3">
-              <i class="fa-solid fa-chart-line w-5"></i>
-              <span>Reports</span>
+          <div class="relative">
+            <button
+              type="button"
+              class="w-full flex items-center justify-between px-6 py-3 text-left text-gray-400 hover:bg-gray-800 hover:text-white transition"
+              data-dropdown-toggle="reportsDropdown"
+            >
+              <span class="flex items-center gap-3">
+                <i class="fa-solid fa-chart-line w-5"></i>
+                Reports
+              </span>
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div
+              id="reportsDropdown"
+              data-dropdown
+              class="hidden flex flex-col bg-gray-900 text-gray-200 text-sm"
+            >
+              <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+                >Sales Report</a
+              >
+              <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+                >Purchase Report</a
+              >
             </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
-          </a>
+          </div>
 
           <!-- Configuration -->
           <a
@@ -168,16 +226,31 @@
           <div class="border-t border-gray-800 my-2 mx-4"></div>
 
           <!-- Contact Management -->
-          <a
-            href="#"
-            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-          >
-            <div class="flex items-center gap-3">
-              <i class="fa-solid fa-users w-5"></i>
-              <span>Contact Management</span>
+          <div class="relative">
+            <button
+              type="button"
+              class="w-full flex items-center justify-between px-6 py-3 text-left text-gray-400 hover:bg-gray-800 hover:text-white transition"
+              data-dropdown-toggle="contactDropdown"
+            >
+              <span class="flex items-center gap-3">
+                <i class="fa-solid fa-users w-5"></i>
+                Contact Management
+              </span>
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div
+              id="contactDropdown"
+              data-dropdown
+              class="hidden flex flex-col bg-gray-900 text-gray-200 text-sm"
+            >
+              <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+                >Customers</a
+              >
+              <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+                >Suppliers</a
+              >
             </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
-          </a>
+          </div>
 
           <!-- Notifications -->
           <a
@@ -289,12 +362,36 @@
               A quick data overview of the inventory.
             </p>
           </div>
-          <button
-            class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md shadow-sm text-sm font-medium hover:bg-gray-50 flex items-center gap-2"
-          >
-            Download Report
-            <i class="fa-solid fa-chevron-down text-xs"></i>
-          </button>
+          <div class="relative">
+            <button
+              type="button"
+              class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md shadow-sm text-sm font-medium hover:bg-gray-50 flex items-center gap-2"
+              data-dropdown-toggle="downloadDropdown"
+            >
+              Download Report
+              <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div
+              id="downloadDropdown"
+              data-dropdown
+              class="hidden absolute right-0 mt-2 w-44 bg-white text-gray-700 rounded-lg shadow-lg border border-gray-100 z-20"
+            >
+              <button
+                class="w-full text-left px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2"
+                type="button"
+              >
+                <i class="fa-regular fa-file-excel text-green-600"></i>
+                Excel
+              </button>
+              <button
+                class="w-full text-left px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2"
+                type="button"
+              >
+                <i class="fa-regular fa-file-pdf text-red-500"></i>
+                PDF
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- STATUS CARDS ROW -->
