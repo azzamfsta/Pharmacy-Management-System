@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharma One - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        /* Menggunakan latar belakang yang lebih terang, atau biru muda untuk login */
+        background-color: #f6f8fb; 
+      }
+      /* Custom color: Teal sesuai customisasi sidebar */
+      .bg-teal-custom { 
+        background-color: #009099;
+      }
+      .border-teal-custom {
+        border-color: #009099;
+      }
+      .text-teal-custom {
+        color: #009099;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md p-6">
+      <div class="flex flex-col items-center mb-8">
+        <div class="flex items-center gap-3 font-bold text-3xl tracking-wider text-gray-800">
+          <img 
+            src="https://ui-avatars.com/api/?name=PO&background=009099&color=fff" 
+            alt="Logo" 
+            class="w-10 h-10 rounded-full" 
+          />
+          <span>Pharma One</span>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-700 mt-4">Login to Your Account</h2>
+        <p class="text-sm text-gray-500">Enter your credentials to access the dashboard.</p>
+      </div>
+
+      <div class="bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
+        <form action="/dashboard" method="POST">
+          <div class="mb-5">
+            <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username / Email</label>
+            <div class="relative">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="e.g., subash.admin"
+                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-teal-custom focus:border-teal-custom transition duration-150 text-sm"
+                required
+              />
+              <i class="fa-solid fa-user absolute left-3 top-3 text-gray-400 text-xs"></i>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-teal-custom focus:border-teal-custom transition duration-150 text-sm"
+                required
+              />
+              <i class="fa-solid fa-lock absolute left-3 top-3 text-gray-400 text-xs"></i>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                class="h-4 w-4 text-teal-custom border-gray-300 rounded focus:ring-teal-custom"
+              />
+              <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                Remember Me
+              </label>
+            </div>
+            <a href="#" class="text-sm font-medium text-teal-custom hover:text-teal-700 transition">
+              Forgot Password?
+            </a>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-teal-custom text-white py-2.5 rounded-lg font-semibold text-lg hover:bg-teal-700 transition duration-200 shadow-md shadow-teal-300/50"
+          >
+            <i class="fa-solid fa-sign-in-alt mr-2"></i> Sign In
+          </button>
+        </form>
+      </div>
+
+      <p class="mt-8 text-center text-sm text-gray-500">
+        Pharma One Management System v 1.1.2
+      </p>
+    </div>
+  </body>
+</html>

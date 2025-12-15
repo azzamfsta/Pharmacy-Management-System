@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pharma One - Group Details</title>
+    <title>Pharma One - Payment Home</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -18,33 +18,58 @@
     />
 
     <style>
+      /* Variabel Kustom Payment */
+      :root {
+        --payment-accent: #1d9e74;
+      }
       body {
         font-family: "Inter", sans-serif;
         background-color: #f6f8fb;
       }
-
-      /* Warna Custom */
       .bg-sidebar {
         background-color: #1a1a1a;
       }
-      .bg-teal-custom {
-        background-color: #009099;
+      /* Menggunakan warna teal/hijau sebagai pengganti merah di context Payment */
+      .bg-red-custom {
+        background-color: var(--payment-accent);
       }
-      .text-teal-custom {
-        color: #009099;
+      .border-red-custom {
+        border-color: var(--payment-accent);
       }
-
       .sidebar-scroll::-webkit-scrollbar {
         width: 5px;
       }
       .sidebar-scroll::-webkit-scrollbar-thumb {
         background: #444;
       }
-
-      /* Styling Table Header */
-      th {
-        font-weight: 600;
-        color: #1d242e;
+      /* Override Tailwind red utilities inside Payment pages */
+      .border-red-500 {
+        border-color: var(--payment-accent) !important;
+      }
+      .text-red-500 {
+        color: var(--payment-accent) !important;
+      }
+      .bg-red-500 {
+        background-color: var(--payment-accent) !important;
+      }
+      .hover\:bg-red-600:hover {
+        background-color: var(--payment-accent) !important;
+      }
+      .hover\:text-red-700:hover {
+        color: var(--payment-accent) !important;
+      }
+      .focus\:ring-red-500:focus {
+        box-shadow: 0 0 0 3px rgba(29, 158, 116, 0.18) !important;
+      }
+      /* Mengubah warna teal-500 pada kartu statistik agar sesuai dengan Payment Accent */
+      .border-teal-500 {
+        border-color: var(--payment-accent) !important;
+      }
+      .text-teal-500 {
+        color: var(--payment-accent) !important;
+      }
+      .focus\:ring-teal-500:focus {
+        box-shadow: 0 0 0 1px var(--payment-accent);
       }
     </style>
   </head>
@@ -114,38 +139,26 @@
             <span>Dashboard</span>
           </a>
 
-          <div class="bg-teal-custom">
+          <div>
             <a
               href="#"
-              class="flex items-center justify-between px-6 py-3 text-white font-medium"
-              onclick="event.preventDefault(); toggleDropdown('inventorySubmenu');"
+              class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+              onclick="event.preventDefault(); toggleSubmenu('inventorySubmenu', 'inventoryChevron');"
             >
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-boxes-stacked w-5"></i>
                 <span>Inventory</span>
               </div>
               <i
-                class="fa-solid fa-chevron-up text-xs"
+                class="fa-solid fa-chevron-down text-xs"
                 id="inventoryChevron"
               ></i>
             </a>
             <div
               id="inventorySubmenu"
-              class="flex flex-col bg-[#1A1A1A] bg-opacity-50 pb-2"
+              class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
             >
-              <a
-                href="inventory_list.html"
-                class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-gray-400 hover:text-white"
-              >
-                <span>List of Medicines</span>
-              </a>
-              <a
-                href="medicine_groups.html"
-                class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-teal-custom bg-white bg-opacity-10 font-medium border-r-4 border-teal-500"
-              >
-                <span>Medicine Groups</span>
-              </a>
-            </div>
+              </div>
           </div>
 
           <a
@@ -157,22 +170,41 @@
           </a>
 
           <a
-            href="Payment/Payment.html"
-            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            href="payment_home.html"
+            class="flex items-center gap-3 px-6 py-3 bg-red-custom bg-opacity-20 border-l-4 border-red-500 text-white transition"
+            onclick="event.preventDefault(); toggleSubmenu('paymentSubmenu', 'paymentChevron');"
           >
             <i class="fa-solid fa-credit-card w-5"></i>
-            <span>Payment</span>
+            <span class="font-medium">Payment</span>
           </a>
+          <div
+            id="paymentSubmenu"
+            class="hidden pl-12 flex-col gap-1 bg-gray-800/50"
+          >
+            <a
+              href="payment_list/payment_list.html"
+              class="py-2 text-xs text-gray-300 hover:text-white transition"
+              >List Transactions</a
+            >
+            <a
+              href="payment_methods/payment_config.html"
+              class="py-2 text-xs text-gray-300 hover:text-white transition"
+              >Payment Configurations</a
+            >
+          </div>
 
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-            onclick="event.preventDefault(); toggleDropdown('reportsSubmenu');"
+            onclick="event.preventDefault(); toggleSubmenu('reportsSubmenu', 'reportsChevron');"
           >
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-chart-line w-5"></i> <span>Reports</span>
             </div>
-            <i class="fa-solid fa-chevron-down text-xs" id="reportsChevron"></i>
+            <i
+              class="fa-solid fa-chevron-down text-xs"
+              id="reportsChevron"
+            ></i>
           </a>
           <div
             id="reportsSubmenu"
@@ -192,13 +224,16 @@
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-            onclick="event.preventDefault(); toggleDropdown('contactSubmenu');"
+            onclick="event.preventDefault(); toggleSubmenu('contactSubmenu', 'contactChevron');"
           >
             <span class="flex items-center gap-3">
               <i class="fa-solid fa-users w-5"></i>
               Contact Management
             </span>
-            <i class="fa-solid fa-chevron-down text-xs" id="contactChevron"></i>
+            <i
+              class="fa-solid fa-chevron-down text-xs"
+              id="contactChevron"
+            ></i>
           </a>
           <div
             id="contactSubmenu"
@@ -270,7 +305,7 @@
           <input
             type="text"
             placeholder="Search for anything here.."
-            class="w-full bg-gray-100 rounded-md py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition"
+            class="w-full bg-gray-100 rounded-md py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-red-500 transition"
           />
           <i
             class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-gray-400"
@@ -293,102 +328,88 @@
       </header>
 
       <div class="p-8">
-        <div class="flex justify-between items-center mb-6">
+        <div class="mb-8 flex justify-between items-center">
           <div>
-            <div
-              class="text-gray-400 text-xl font-bold flex items-center gap-2 mb-1"
-            >
-              <span class="text-gray-400">Inventory</span>
-              <span>›</span>
-              <a
-                href="medicine_groups.html"
-                class="text-gray-400 hover:text-gray-600"
-                >Medicine Groups</a
-              >
-              <span>›</span>
-              <span class="text-gray-800">Generic Medicine (02)</span>
-            </div>
-            <p class="text-gray-500 text-sm">
-              Detailed view of a medicine group.
+            <h1 class="text-2xl font-bold text-gray-800">Payment Overview</h1>
+            <p class="text-gray-500 text-sm mt-1">
+              Quick summary of financial activities and pending payments.
             </p>
           </div>
-
-          <button
-            class="bg-[#F0483E] hover:bg-red-600 text-white px-5 py-2.5 rounded shadow-sm text-sm font-medium transition flex items-center gap-2"
+          <a
+            href="payment_invoice/invoice_detail.html"
+            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-lg flex items-center gap-2 transition"
           >
-            <i class="fa-solid fa-plus"></i> Add Medicine
-          </button>
+            <i class="fa-solid fa-credit-card"></i> Process New Payment
+          </a>
         </div>
 
-        <div class="mb-6">
-          <div class="relative w-80">
-            <input
-              type="text"
-              placeholder="Search for Medicine"
-              class="w-full bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 bg-opacity-50"
-            />
-            <i
-              class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-gray-400"
-            ></i>
+        <div class="grid grid-cols-4 gap-6 mb-8">
+          <div
+            class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-500"
+          >
+            <p class="text-sm text-gray-500 font-medium">
+              Total Revenue (This Month)
+            </p>
+            <h2 class="text-3xl font-bold text-gray-800 mt-1">Rp 125.4 Jt</h2>
+            <p class="text-xs text-green-500 mt-2">
+              <i class="fa-solid fa-arrow-up"></i> 12.5% vs last month
+            </p>
+          </div>
+          <div
+            class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-500"
+          >
+            <p class="text-sm text-gray-500 font-medium">Pending Invoices</p>
+            <h2 class="text-3xl font-bold text-yellow-600 mt-1">15</h2>
+            <p class="text-xs text-gray-500 mt-2">Total amount Rp 45.9 Jt</p>
+          </div>
+          <div
+            class="bg-white p-6 rounded-lg shadow-md border-l-4 border-red-500"
+          >
+            <p class="text-sm text-gray-500 font-medium">Payments (Last 24h)</p>
+            <h2 class="text-3xl font-bold text-gray-800 mt-1">Rp 4.2 Jt</h2>
+            <p class="text-xs text-red-500 mt-2">
+              <i class="fa-solid fa-arrow-down"></i> 3.1% vs previous day
+            </p>
+          </div>
+          <div
+            class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500"
+          >
+            <p class="text-sm text-gray-500 font-medium">Unpaid Patients</p>
+            <h2 class="text-3xl font-bold text-blue-600 mt-1">7</h2>
+            <p class="text-xs text-gray-500 mt-2">Need follow-up</p>
           </div>
         </div>
 
         <div
-          class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-6"
+          class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden"
         >
-          <table class="w-full text-sm text-left text-gray-700">
-            <thead
-              class="text-xs text-gray-800 uppercase bg-white border-b border-gray-200"
-            >
-              <tr>
-                <th scope="col" class="px-6 py-4 w-1/3">
-                  Medicine Name
-                  <i class="fa-solid fa-sort ml-1 text-gray-400"></i>
-                </th>
-                <th scope="col" class="px-6 py-4 w-1/3">
-                  No of Medicines
-                  <i class="fa-solid fa-sort ml-1 text-gray-400"></i>
-                </th>
-                <th scope="col" class="px-6 py-4 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Augmentin 625 Duo Tablet
-                </td>
-                <td class="px-6 py-4">22</td>
-                <td class="px-6 py-4 text-right">
-                  <button
-                    class="text-[#F0483E] hover:text-red-700 font-medium text-xs flex items-center justify-end gap-2 ml-auto border border-transparent hover:border-red-100 p-1 rounded"
-                  >
-                    <i class="fa-regular fa-trash-can"></i> Remove from Group
-                  </button>
-                </td>
-              </tr>
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Azithral 500 Tablet
-                </td>
-                <td class="px-6 py-4">08</td>
-                <td class="px-6 py-4 text-right">
-                  <button
-                    class="text-[#F0483E] hover:text-red-700 font-medium text-xs flex items-center justify-end gap-2 ml-auto border border-transparent hover:border-red-100 p-1 rounded"
-                  >
-                    <i class="fa-regular fa-trash-can"></i> Remove from Group
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div>
-          <button
-            class="border border-[#F0483E] text-[#F0483E] bg-white hover:bg-red-50 px-5 py-2.5 rounded shadow-sm text-sm font-medium transition flex items-center gap-2"
+          <div
+            class="px-6 py-4 border-b border-gray-100 flex justify-between items-center"
           >
-            <i class="fa-regular fa-trash-can"></i> Delete Group
-          </button>
+            <h3 class="font-bold text-gray-800">Quick Actions</h3>
+          </div>
+          <div class="p-6">
+            <a
+              href="payment_list/payment_list.html"
+              class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-lg mb-3 transition"
+            >
+              <span class="font-medium text-gray-800"
+                ><i class="fa-solid fa-file-invoice mr-2 text-red-500"></i> View
+                All Pending Invoices</span
+              >
+              <i class="fa-solid fa-chevron-right text-gray-400"></i>
+            </a>
+            <a
+              href="payment_methods/payment_config.html"
+              class="flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition"
+            >
+              <span class="font-medium text-gray-800"
+                ><i class="fa-solid fa-sliders mr-2 text-red-500"></i> Manage
+                Payment Settings</span
+              >
+              <i class="fa-solid fa-chevron-right text-gray-400"></i>
+            </a>
+          </div>
         </div>
       </div>
     </main>
@@ -398,23 +419,33 @@
       function toggleDropdown(id) {
         const element = document.getElementById(id);
         if (element) {
-          if (id === 'userDropdown') {
-            element.classList.toggle('hidden');
-            return;
-          }
-
           element.classList.toggle('hidden');
-          const chevronId = id.replace('Submenu', 'Chevron');
-          const chevron = document.getElementById(chevronId);
-          if (chevron) {
-            if (element.classList.contains('hidden')) {
-              chevron.classList.remove('fa-chevron-up');
-              chevron.classList.add('fa-chevron-down');
+        }
+      }
+
+      function toggleSubmenu(submenuId, chevronId) {
+        const submenu = document.getElementById(submenuId);
+        const chevron = document.getElementById(chevronId);
+        
+        // Logic untuk submenus yang tidak selalu terbuka (Inventory, Reports, Contact)
+        if (submenuId !== 'paymentSubmenu') {
+            if (submenu.classList.contains('hidden')) {
+              // Open submenu
+              submenu.classList.remove('hidden');
+              submenu.classList.add('flex');
+              if(chevron) {
+                 chevron.classList.remove('fa-chevron-down');
+                 chevron.classList.add('fa-chevron-up');
+              }
             } else {
-              chevron.classList.remove('fa-chevron-down');
-              chevron.classList.add('fa-chevron-up');
+              // Close submenu
+              submenu.classList.add('hidden');
+              submenu.classList.remove('flex');
+               if(chevron) {
+                 chevron.classList.remove('fa-chevron-up');
+                 chevron.classList.add('fa-chevron-down');
+              }
             }
-          }
         }
       }
 
@@ -436,7 +467,8 @@
 
         const clockElement = document.getElementById('liveClock');
         if (clockElement) {
-          clockElement.textContent = `${dateString} • ${timeString}`;
+          const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+          clockElement.textContent = `${dayName}, ${dateString} • ${timeString}`;
         }
       }
 
@@ -445,7 +477,13 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Ensure Reports and Contact submenus are created and hidden
+        // Isi konten submenu yang bersifat dinamis (placeholder)
+        const inventorySubmenu = document.getElementById('inventorySubmenu');
+        if (inventorySubmenu) {
+             inventorySubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="inventory/inventory_list.html">List of Medicines</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="inventory/medicine_groups.html">Medicine Groups</a>`;
+        }
+
         const reportsSubmenu = document.getElementById('reportsSubmenu');
         if (reportsSubmenu) {
           reportsSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Sales Report</a>
@@ -457,13 +495,7 @@
           contactSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Customers</a>
                                         <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Suppliers</a>`;
         }
-
-        // Set the initial chevron direction for Inventory (it's open)
-        const inventoryChevron = document.getElementById('inventoryChevron');
-        if (inventoryChevron) {
-            inventoryChevron.classList.remove('fa-chevron-down');
-            inventoryChevron.classList.add('fa-chevron-up');
-        }
+        
       });
     </script>
   </body>

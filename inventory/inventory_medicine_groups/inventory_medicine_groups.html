@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharma One - Medicine Groups</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <!-- Google Font Inter -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -52,11 +49,9 @@
     </style>
   </head>
   <body class="flex h-screen overflow-hidden">
-    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-sidebar text-white flex flex-col justify-between hidden md:flex shrink-0"
     >
-      <!-- Logo -->
       <div>
         <div
           class="h-16 flex items-center justify-center border-b border-gray-800"
@@ -69,7 +64,6 @@
           </div>
         </div>
 
-        <!-- User Profile -->
         <div class="px-6 py-6 border-b border-gray-800 relative">
           <div class="flex items-center gap-3">
             <img
@@ -90,7 +84,6 @@
               ></i>
             </button>
           </div>
-          <!-- Dropdown User -->
           <div
             id="userDropdown"
             class="hidden absolute left-14 top-14 w-48 bg-white rounded-md shadow-xl z-50 overflow-hidden border border-gray-200"
@@ -110,11 +103,9 @@
           </div>
         </div>
 
-        <!-- Navigation Menu -->
         <nav
           class="mt-4 flex flex-col gap-1 sidebar-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
         >
-          <!-- Dashboard (Non-Active) -->
           <a
             href="dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -123,29 +114,30 @@
             <span>Dashboard</span>
           </a>
 
-          <!-- Inventory (ACTIVE & OPEN) -->
           <div class="bg-teal-custom">
             <a
-              href="inventory.html"
+              href="#"
               class="flex items-center justify-between px-6 py-3 text-white font-medium"
+              onclick="event.preventDefault(); toggleSubmenu('inventorySubmenu', 'inventoryChevron');"
             >
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-boxes-stacked w-5"></i>
                 <span>Inventory</span>
               </div>
-              <i class="fa-solid fa-chevron-up text-xs"></i>
+              <i class="fa-solid fa-chevron-up text-xs" id="inventoryChevron"></i>
             </a>
-            <!-- Submenu -->
-            <div class="bg-[#1A1A1A] bg-opacity-50 pb-2">
+            <div
+              id="inventorySubmenu"
+              class="flex flex-col bg-[#1A1A1A] bg-opacity-50 pb-2"
+            >
               <a
                 href="inventory_list.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-gray-400 hover:text-white"
               >
                 <span>List of Medicines</span>
               </a>
-              <!-- Medicine Groups: ACTIVE SUBMENU -->
               <a
-                href="#"
+                href="medicine_groups.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-teal-custom bg-white bg-opacity-10 font-medium border-r-4 border-teal-500"
               >
                 <span>Medicine Groups</span>
@@ -153,20 +145,40 @@
             </div>
           </div>
 
-          <!-- Reports -->
+          <a
+            href="purchase/purchase_home.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <i class="fa-solid fa-cart-shopping w-5"></i>
+            <span>Purchase</span>
+          </a>
+
+          <a
+            href="Payment/Payment.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <i class="fa-solid fa-credit-card w-5"></i>
+            <span>Payment</span>
+          </a>
+
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleSubmenu('reportsSubmenu', 'reportsChevron');"
           >
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-chart-line w-5"></i> <span>Reports</span>
             </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+            <i class="fa-solid fa-chevron-down text-xs" id="reportsChevron"></i>
           </a>
+          <div
+            id="reportsSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            </div>
 
-          <!-- Configuration -->
           <a
-            href="#"
+            href="configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
@@ -174,25 +186,30 @@
 
           <div class="border-t border-gray-800 my-2 mx-4"></div>
 
-          <!-- Contact Management -->
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleSubmenu('contactSubmenu', 'contactChevron');"
           >
-            <div class="flex items-center gap-3">
+            <span class="flex items-center gap-3">
               <i class="fa-solid fa-users w-5"></i>
-              <span>Contact Management</span>
-            </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+              Contact Management
+            </span>
+            <i class="fa-solid fa-chevron-down text-xs" id="contactChevron"></i>
           </a>
+          <div
+            id="contactSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            </div>
 
-          <!-- Notifications -->
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <div class="flex items-center gap-3">
-              <i class="fa-solid fa-bell w-5"></i> <span>Notifications</span>
+              <i class="fa-solid fa-bell w-5"></i>
+              <span>Notifications</span>
             </div>
             <span
               class="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full"
@@ -200,7 +217,6 @@
             >
           </a>
 
-          <!-- Chat -->
           <a
             href="#"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -209,7 +225,6 @@
             <span>Chat with Visitors</span>
           </a>
 
-          <!-- Settings Section -->
           <div class="mt-4">
             <a
               href="#"
@@ -231,11 +246,17 @@
               <i class="fa-regular fa-circle-question w-5"></i>
               <span>Get Technical Help</span>
             </a>
+            <a
+              href="/login"
+              class="flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-red-800 hover:text-white transition"
+            >
+              <i class="fa-solid fa-right-from-bracket w-5"></i>
+              <span>Logout</span>
+            </a>
           </div>
         </nav>
       </div>
 
-      <!-- Footer Sidebar -->
       <div
         class="p-4 border-t border-gray-800 text-xs text-gray-500 text-center"
       >
@@ -244,9 +265,7 @@
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-1 flex flex-col h-screen overflow-y-auto">
-      <!-- HEADER -->
       <header
         class="h-16 bg-white shadow-sm flex items-center justify-between px-8 sticky top-0 z-10"
       >
@@ -276,15 +295,13 @@
         </div>
       </header>
 
-      <!-- CONTENT AREA -->
       <div class="p-8">
-        <!-- Page Header & Breadcrumb -->
         <div class="flex justify-between items-center mb-6">
           <div>
             <h1 class="text-2xl font-bold text-gray-800">
               Inventory
               <span class="text-gray-400 text-xl font-normal"
-                >› Medicine Groups (02)</span
+                >› Medicine Groups (03)</span
               >
             </h1>
             <p class="text-gray-500 text-sm mt-1">List of medicines groups.</p>
@@ -297,7 +314,6 @@
           </button>
         </div>
 
-        <!-- Search Toolbar -->
         <div class="flex justify-between items-center mb-4">
           <div class="relative w-80">
             <input
@@ -311,7 +327,6 @@
           </div>
         </div>
 
-        <!-- Table Container -->
         <div
           class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
         >
@@ -331,7 +346,6 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Row 1 -->
               <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
                 <td class="px-6 py-4 font-medium text-gray-900">
                   Generic Medicine
@@ -339,33 +353,31 @@
                 <td class="px-6 py-4">02</td>
                 <td class="px-6 py-4 text-right">
                   <a
-                    href="#"
+                    href="group_detail.html"
                     class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center justify-end gap-1"
                   >
                     View Full Detail <i class="fa-solid fa-angles-right"></i>
                   </a>
                 </td>
               </tr>
-              <!-- Row 2 -->
               <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
                 <td class="px-6 py-4 font-medium text-gray-900">Diabetes</td>
                 <td class="px-6 py-4">32</td>
                 <td class="px-6 py-4 text-right">
                   <a
-                    href="#"
+                    href="group_detail.html"
                     class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center justify-end gap-1"
                   >
                     View Full Detail <i class="fa-solid fa-angles-right"></i>
                   </a>
                 </td>
               </tr>
-              <!-- Row 3 (Placeholder data to fill space) -->
               <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
                 <td class="px-6 py-4 font-medium text-gray-900">Cardio</td>
                 <td class="px-6 py-4">15</td>
                 <td class="px-6 py-4 text-right">
                   <a
-                    href="#"
+                    href="group_detail.html"
                     class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center justify-end gap-1"
                   >
                     View Full Detail <i class="fa-solid fa-angles-right"></i>
@@ -375,13 +387,83 @@
             </tbody>
           </table>
 
-          <!-- Pagination (Optional, jika data sedikit seperti di gambar, ini bisa disembunyikan atau ditampilkan statis) -->
-          <!-- <div class="flex items-center justify-between px-6 py-4 bg-white border-t border-gray-200"> ... </div> -->
-        </div>
+          </div>
       </div>
     </main>
 
-    <!-- Script JS -->
-    <script src="js/script.js"></script>
+    <script>
+      // Function to toggle Dropdown/Submenu visibility
+      function toggleDropdown(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.classList.toggle('hidden');
+        }
+      }
+
+      function toggleSubmenu(submenuId, chevronId) {
+        const submenu = document.getElementById(submenuId);
+        const chevron = document.getElementById(chevronId);
+
+        if (submenu.classList.contains('hidden')) {
+          submenu.classList.remove('hidden');
+          submenu.classList.add('flex');
+          chevron.classList.remove('fa-chevron-down');
+          chevron.classList.add('fa-chevron-up');
+        } else {
+          submenu.classList.add('hidden');
+          submenu.classList.remove('flex');
+          chevron.classList.remove('fa-chevron-up');
+          chevron.classList.add('fa-chevron-down');
+        }
+      }
+
+      // Live Clock (contoh sederhana)
+      function updateClock() {
+        const now = new Date();
+        const optionsDate = {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        };
+        const dateString = now.toLocaleDateString('en-US', optionsDate);
+        const timeString = now.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        });
+
+        const clockElement = document.getElementById('liveClock');
+        if (clockElement) {
+          clockElement.textContent = `${dateString} • ${timeString}`;
+        }
+      }
+
+      // Initial call and set interval
+      document.addEventListener('DOMContentLoaded', () => {
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Ensure Reports and Contact submenus are created and hidden
+        const reportsSubmenu = document.getElementById('reportsSubmenu');
+        if (reportsSubmenu) {
+          reportsSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Sales Report</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Purchase Report</a>`;
+        }
+
+        const contactSubmenu = document.getElementById('contactSubmenu');
+        if (contactSubmenu) {
+          contactSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Customers</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Suppliers</a>`;
+        }
+
+        // Set the initial chevron direction for Inventory (it's open)
+        const inventoryChevron = document.getElementById('inventoryChevron');
+        if (inventoryChevron) {
+            inventoryChevron.classList.remove('fa-chevron-down');
+            inventoryChevron.classList.add('fa-chevron-up');
+        }
+      });
+    </script>
   </body>
 </html>

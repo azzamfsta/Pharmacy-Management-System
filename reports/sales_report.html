@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharma One - Sales Report</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <!-- Google Font Inter -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Chart.js untuk Grafik -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
@@ -58,14 +54,21 @@
         background: #ccc;
         border-radius: 2px;
       }
+      
+      /* Standard colors for interactive elements */
+      .focus\:ring-teal-500:focus {
+        box-shadow: 0 0 0 1px #009099;
+        border-color: #009099;
+      }
+      .border-teal-500 {
+        border-color: #009099;
+      }
     </style>
   </head>
   <body class="flex h-screen overflow-hidden">
-    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-sidebar text-white flex flex-col justify-between hidden md:flex shrink-0"
     >
-      <!-- Logo -->
       <div>
         <div
           class="h-16 flex items-center justify-center border-b border-gray-800"
@@ -78,7 +81,6 @@
           </div>
         </div>
 
-        <!-- User Profile -->
         <div class="px-6 py-6 border-b border-gray-800 relative">
           <div class="flex items-center gap-3">
             <img
@@ -99,7 +101,6 @@
               ></i>
             </button>
           </div>
-          <!-- Dropdown User -->
           <div
             id="userDropdown"
             class="hidden absolute left-14 top-14 w-48 bg-white rounded-md shadow-xl z-50 overflow-hidden border border-gray-200"
@@ -111,7 +112,7 @@
               <i class="fa-regular fa-circle-user text-gray-500"></i> My Profile
             </a>
             <a
-              href="#"
+              href="/login"
               class="block px-4 py-3 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3"
             >
               <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -119,11 +120,9 @@
           </div>
         </div>
 
-        <!-- Navigation Menu -->
         <nav
           class="mt-4 flex flex-col gap-1 sidebar-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
         >
-          <!-- Dashboard (Non-Active) -->
           <a
             href="dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -132,51 +131,83 @@
             <span>Dashboard</span>
           </a>
 
-          <!-- Inventory (Non-Active, Collapsed) -->
+          <div>
+            <a
+              href="#"
+              class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+              onclick="event.preventDefault(); toggleSubmenu('inventorySubmenu', 'inventoryChevron');"
+            >
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-boxes-stacked w-5"></i>
+                <span>Inventory</span>
+              </div>
+              <i
+                class="fa-solid fa-chevron-down text-xs"
+                id="inventoryChevron"
+              ></i>
+            </a>
+            <div
+              id="inventorySubmenu"
+              class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+            >
+              </div>
+          </div>
+          
           <a
-            href="inventory.html"
-            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            href="purchase/purchase_home.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
-            <div class="flex items-center gap-3">
-              <i class="fa-solid fa-boxes-stacked w-5"></i>
-              <span>Inventory</span>
-            </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+            <i class="fa-solid fa-cart-shopping w-5"></i>
+            <span>Purchase</span>
           </a>
 
-          <!-- Reports (ACTIVE & OPEN) -->
-          <div class="bg-teal-custom">
+          <a
+            href="payment_home.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleSubmenu('paymentSubmenu', 'paymentChevron');"
+          >
+            <i class="fa-solid fa-credit-card w-5"></i>
+            <span>Payment</span>
+          </a>
+          <div
+            id="paymentSubmenu"
+            class="hidden pl-12 flex-col gap-1 bg-gray-900 text-gray-200 text-sm"
+          >
+            </div>
+
+          <div class="bg-teal-custom bg-opacity-90 border-l-4 border-yellow-400">
             <a
               href="reports.html"
               class="flex items-center justify-between px-6 py-3 text-white font-medium"
+              onclick="event.preventDefault(); toggleSubmenu('reportsSubmenu', 'reportsChevron');"
             >
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-chart-line w-5"></i>
                 <span>Reports</span>
               </div>
-              <i class="fa-solid fa-chevron-up text-xs"></i>
+              <i class="fa-solid fa-chevron-up text-xs" id="reportsChevron"></i>
             </a>
-            <!-- Submenu -->
-            <div class="bg-[#1A1A1A] bg-opacity-50 pb-2">
-              <!-- Sales Report: ACTIVE SUBMENU -->
+            <div
+              id="reportsSubmenu"
+              class="pl-12 flex flex-col gap-1 bg-gray-800/50"
+            >
               <a
                 href="sales_report.html"
-                class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-teal-custom bg-white bg-opacity-10 font-medium border-r-4 border-teal-500"
+                class="py-2 text-xs text-yellow-400 font-semibold transition border-l-2 border-yellow-400 pl-2"
               >
-                <span>Sales Report</span>
+                Sales Report
               </a>
               <a
-                href="#"
-                class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-white hover:bg-opacity-5 transition"
+                href="payment_report.html"
+                class="py-2 text-xs text-gray-300 hover:text-white transition"
               >
-                <span>Payments Report</span>
+                Payments Report
               </a>
             </div>
           </div>
 
-          <!-- Configuration -->
           <a
-            href="#"
+            href="configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
@@ -184,19 +215,28 @@
 
           <div class="border-t border-gray-800 my-2 mx-4"></div>
 
-          <!-- Contact Management -->
-          <a
-            href="#"
-            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-          >
-            <div class="flex items-center gap-3">
-              <i class="fa-solid fa-users w-5"></i>
-              <span>Contact Management</span>
-            </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
-          </a>
+          <div>
+            <a
+              href="#"
+              class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+              onclick="event.preventDefault(); toggleSubmenu('contactSubmenu', 'contactChevron');"
+            >
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-users w-5"></i>
+                <span>Contact Management</span>
+              </div>
+              <i
+                class="fa-solid fa-chevron-down text-xs"
+                id="contactChevron"
+              ></i>
+            </a>
+            <div
+              id="contactSubmenu"
+              class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+            >
+              </div>
+          </div>
 
-          <!-- Notifications -->
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -210,7 +250,6 @@
             >
           </a>
 
-          <!-- Chat -->
           <a
             href="#"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -219,7 +258,6 @@
             <span>Chat with Visitors</span>
           </a>
 
-          <!-- Settings Section -->
           <div class="mt-4">
             <a
               href="#"
@@ -241,11 +279,17 @@
               <i class="fa-regular fa-circle-question w-5"></i>
               <span>Get Technical Help</span>
             </a>
+            <a
+              href="/login"
+              class="flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-red-800 hover:text-white transition"
+            >
+              <i class="fa-solid fa-right-from-bracket w-5"></i>
+              <span>Logout</span>
+            </a>
           </div>
         </nav>
       </div>
 
-      <!-- Footer Sidebar -->
       <div
         class="p-4 border-t border-gray-800 text-xs text-gray-500 text-center"
       >
@@ -254,9 +298,7 @@
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-1 flex flex-col h-screen overflow-y-auto">
-      <!-- HEADER -->
       <header
         class="h-16 bg-white shadow-sm flex items-center justify-between px-8 sticky top-0 z-10"
       >
@@ -264,7 +306,7 @@
           <input
             type="text"
             placeholder="Search for anything here.."
-            class="w-full bg-gray-100 rounded-md py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition"
+            class="w-full bg-gray-100 rounded-md py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-teal-custom transition"
           />
           <i
             class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-gray-400"
@@ -286,12 +328,9 @@
         </div>
       </header>
 
-      <!-- CONTENT AREA -->
       <div class="p-8">
-        <!-- Page Header -->
         <div class="flex justify-between items-start mb-6">
           <div>
-            <!-- Breadcrumb -->
             <div
               class="text-gray-400 text-xl font-bold flex items-center gap-2 mb-1"
             >
@@ -312,16 +351,14 @@
           </button>
         </div>
 
-        <!-- FILTERS ROW -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <!-- Date Range -->
           <div>
             <label class="block text-xs font-bold text-gray-600 mb-1"
               >Date Range</label
             >
             <div class="relative">
               <div
-                class="w-full bg-white border border-gray-300 text-gray-700 text-sm rounded-md py-2 pl-3 pr-8 flex items-center"
+                class="w-full bg-white border border-gray-300 text-gray-700 text-sm rounded-md py-2 pl-3 pr-8 flex items-center cursor-pointer hover:border-gray-400"
               >
                 <span>01 December 2021 - 31 December 2021</span>
               </div>
@@ -330,14 +367,13 @@
               ></i>
             </div>
           </div>
-          <!-- Medicine Group -->
           <div>
             <label class="block text-xs font-bold text-gray-600 mb-1"
               >Medicine Group</label
             >
             <div class="relative">
               <select
-                class="w-full bg-white border border-gray-300 text-gray-700 text-sm rounded-md py-2 pl-3 pr-8 appearance-none cursor-pointer"
+                class="w-full bg-white border border-gray-300 text-gray-700 text-sm rounded-md py-2 pl-3 pr-8 appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-teal-custom"
               >
                 <option>- Select Group -</option>
                 <option>Generic Medicine</option>
@@ -348,14 +384,13 @@
               ></i>
             </div>
           </div>
-          <!-- User Name -->
           <div>
             <label class="block text-xs font-bold text-gray-600 mb-1"
               >User Name</label
             >
             <div class="relative">
               <select
-                class="w-full bg-white border border-gray-300 text-gray-700 text-sm rounded-md py-2 pl-3 pr-8 appearance-none cursor-pointer"
+                class="w-full bg-white border border-gray-300 text-gray-700 text-sm rounded-md py-2 pl-3 pr-8 appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-teal-custom"
               >
                 <option>- Select User Name -</option>
                 <option>Subash</option>
@@ -368,26 +403,21 @@
           </div>
         </div>
 
-        <!-- MAIN CONTENT GRID (Chart & List) -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <!-- LEFT COLUMN: Sales Made Chart (2/3 width) -->
           <div
             class="lg:col-span-2 bg-white rounded border border-gray-200 shadow-sm p-6"
           >
             <div class="mb-4">
-              <h3 class="font-bold text-gray-800">Sales Made</h3>
+              <h3 class="font-bold text-gray-800">Sales Made (IDR x 1000)</h3>
             </div>
-            <!-- Chart Container -->
             <div class="relative h-72 w-full">
               <canvas id="salesChart"></canvas>
             </div>
           </div>
 
-          <!-- RIGHT COLUMN: Order List (1/3 width) -->
           <div
             class="bg-white rounded border border-gray-200 shadow-sm flex flex-col h-[400px]"
           >
-            <!-- Table Header -->
             <div class="px-6 py-4 border-b border-gray-100 grid grid-cols-2">
               <h3 class="font-bold text-gray-800 text-sm">Order ID</h3>
               <h3 class="font-bold text-gray-800 text-sm text-right">
@@ -395,62 +425,170 @@
               </h3>
             </div>
 
-            <!-- Scrollable List -->
             <div class="overflow-y-auto order-list-scroll flex-1 p-2">
               <table class="w-full text-sm text-gray-600">
                 <tbody>
-                  <!-- Item 1 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848598</td>
-                    <td class="px-4 py-3 text-right">01 Dec 2021 10:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848598</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      01 Dec 2021 10:25
+                    </td>
                   </tr>
-                  <!-- Item 2 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848577</td>
-                    <td class="px-4 py-3 text-right">02 Dec 2021 18:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848577</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      02 Dec 2021 18:25
+                    </td>
                   </tr>
-                  <!-- Item 3 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848563</td>
-                    <td class="px-4 py-3 text-right">03 Dec 2021 18:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848563</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      03 Dec 2021 18:25
+                    </td>
                   </tr>
-                  <!-- Item 4 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848599</td>
-                    <td class="px-4 py-3 text-right">05 Dec 2021 18:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848599</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      05 Dec 2021 18:25
+                    </td>
                   </tr>
-                  <!-- Item 5 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848568</td>
-                    <td class="px-4 py-3 text-right">09 Dec 2021 18:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848568</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      09 Dec 2021 18:25
+                    </td>
                   </tr>
-                  <!-- Item 6 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848567</td>
-                    <td class="px-4 py-3 text-right">10 Dec 2021 18:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848567</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      10 Dec 2021 18:25
+                    </td>
                   </tr>
-                  <!-- Item 7 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848564</td>
-                    <td class="px-4 py-3 text-right">15 Dec 2021 18:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848564</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      15 Dec 2021 18:25
+                    </td>
                   </tr>
-                  <!-- Item 8 -->
                   <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3">2485855848544</td>
-                    <td class="px-4 py-3 text-right">21 Dec 2021 18:25</td>
+                    <td class="px-4 py-3 font-medium">2485855848544</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      21 Dec 2021 18:25
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 font-medium">2485855848545</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      23 Dec 2021 09:15
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 font-medium">2485855848546</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      24 Dec 2021 11:40
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 font-medium">2485855848547</td>
+                    <td class="px-4 py-3 text-right text-xs">
+                      25 Dec 2021 16:00
+                    </td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+            
+            <div class="p-4 border-t border-gray-100 text-center">
+                <a href="#" class="text-teal-custom text-sm font-semibold hover:text-teal-600 transition">View All Orders</a>
             </div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- Script JS Global -->
-    <script src="js/script.js"></script>
+    <script>
+      // Function to toggle Dropdown visibility
+      function toggleDropdown(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.classList.toggle('hidden');
+        }
+      }
 
-    <!-- Chart Config Script (Khusus Halaman Ini) -->
+      // Function to toggle Submenu visibility
+      function toggleSubmenu(submenuId, chevronId) {
+        const submenu = document.getElementById(submenuId);
+        const chevron = document.getElementById(chevronId);
+
+        // Hanya toggle jika submenu bukan Reports (karena Reports terbuka permanen di halaman ini)
+        if (submenuId !== 'reportsSubmenu') {
+            if (submenu.classList.contains('hidden')) {
+              submenu.classList.remove('hidden');
+              submenu.classList.add('flex');
+              if (chevron) {
+                chevron.classList.remove('fa-chevron-down');
+                chevron.classList.add('fa-chevron-up');
+              }
+            } else {
+              submenu.classList.add('hidden');
+              submenu.classList.remove('flex');
+              if (chevron) {
+                chevron.classList.remove('fa-chevron-up');
+                chevron.classList.add('fa-chevron-down');
+              }
+            }
+        }
+      }
+
+      // Live Clock
+      function updateClock() {
+        const now = new Date();
+        const optionsDate = {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        };
+        const dateString = now.toLocaleDateString('en-US', optionsDate);
+        const timeString = now.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        });
+
+        const clockElement = document.getElementById('liveClock');
+        if (clockElement) {
+          const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+          clockElement.textContent = `${dayName}, ${dateString} • ${timeString}`;
+        }
+      }
+
+      // Initial call and set interval
+      document.addEventListener('DOMContentLoaded', () => {
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Isi konten submenu yang bersifat dinamis
+        const inventorySubmenu = document.getElementById('inventorySubmenu');
+        if (inventorySubmenu) {
+             inventorySubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 text-xs text-gray-300 hover:text-white hover:bg-gray-800/50 transition" href="inventory/inventory_list.html">List of Medicines</a>
+                                        <a class="pl-14 pr-6 py-2 text-xs text-gray-300 hover:text-white hover:bg-gray-800/50 transition" href="inventory/medicine_groups.html">Medicine Groups</a>`;
+        }
+
+        const paymentSubmenu = document.getElementById('paymentSubmenu');
+        if (paymentSubmenu) {
+            paymentSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 text-xs text-gray-300 hover:text-white hover:bg-gray-800/50 transition" href="payment_list/payment_list.html">List Transactions</a>
+                                        <a class="pl-14 pr-6 py-2 text-xs text-gray-300 hover:text-white hover:bg-gray-800/50 transition" href="payment_methods/payment_config.html">Payment Configurations</a>`;
+        }
+        
+        const contactSubmenu = document.getElementById('contactSubmenu');
+        if (contactSubmenu) {
+          contactSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 text-xs text-gray-300 hover:text-white hover:bg-gray-800/50 transition" href="#">Customers</a>
+                                        <a class="pl-14 pr-6 py-2 text-xs text-gray-300 hover:text-white hover:bg-gray-800/50 transition" href="#">Suppliers</a>`;
+        }
+      });
+    </script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById("salesChart").getContext("2d");
@@ -503,7 +641,8 @@
                 displayColors: false,
                 callbacks: {
                   label: function (context) {
-                    return context.parsed.y;
+                    // Tampilkan data sebagai mata uang IDR x 1000
+                    return `Sales: Rp. ${context.parsed.y}K`;
                   },
                 },
               },
@@ -519,6 +658,9 @@
                 ticks: {
                   stepSize: 50,
                   color: "#9CA3AF",
+                  callback: function(value) {
+                    return `Rp. ${value}K`; // Tambahkan label pada sumbu Y
+                  }
                 },
               },
               x: {

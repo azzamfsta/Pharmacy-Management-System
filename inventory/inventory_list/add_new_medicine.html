@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharma One - Add Medicine</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <!-- Google Font Inter -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -46,22 +43,20 @@
 
       /* Styling Input Custom */
       .form-input {
-        background-color: #f6f8fb; /* Sedikit abu-abu/biru muda sesuai desain */
+        background-color: #f6f8fb;
         border-color: #d1d5db;
       }
       .form-input:focus {
         background-color: #ffffff;
         border-color: #009099;
-        ring-color: #009099;
+        box-shadow: 0 0 0 1px #009099; /* Simulasi ring focus */
       }
     </style>
   </head>
   <body class="flex h-screen overflow-hidden">
-    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-sidebar text-white flex flex-col justify-between hidden md:flex shrink-0"
     >
-      <!-- Logo -->
       <div>
         <div
           class="h-16 flex items-center justify-center border-b border-gray-800"
@@ -74,7 +69,6 @@
           </div>
         </div>
 
-        <!-- User Profile -->
         <div class="px-6 py-6 border-b border-gray-800 relative">
           <div class="flex items-center gap-3">
             <img
@@ -95,7 +89,6 @@
               ></i>
             </button>
           </div>
-          <!-- Dropdown User -->
           <div
             id="userDropdown"
             class="hidden absolute left-14 top-14 w-48 bg-white rounded-md shadow-xl z-50 overflow-hidden border border-gray-200"
@@ -115,11 +108,9 @@
           </div>
         </div>
 
-        <!-- Navigation Menu -->
         <nav
           class="mt-4 flex flex-col gap-1 sidebar-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
         >
-          <!-- Dashboard (Non-Active) -->
           <a
             href="dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -128,21 +119,25 @@
             <span>Dashboard</span>
           </a>
 
-          <!-- Inventory (ACTIVE & OPEN) -->
           <div class="bg-teal-custom">
             <a
               href="inventory.html"
               class="flex items-center justify-between px-6 py-3 text-white font-medium"
+              onclick="event.preventDefault(); toggleDropdown('inventorySubmenu');"
             >
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-boxes-stacked w-5"></i>
                 <span>Inventory</span>
               </div>
-              <i class="fa-solid fa-chevron-up text-xs"></i>
+              <i
+                class="fa-solid fa-chevron-up text-xs"
+                id="inventoryChevron"
+              ></i>
             </a>
-            <!-- Submenu -->
-            <div class="bg-[#1A1A1A] bg-opacity-50 pb-2">
-              <!-- List of Medicines: ACTIVE SUBMENU -->
+            <div
+              id="inventorySubmenu"
+              class="flex flex-col bg-[#1A1A1A] bg-opacity-50 pb-2"
+            >
               <a
                 href="inventory_list.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-teal-custom bg-white bg-opacity-10 font-medium border-r-4 border-teal-500"
@@ -158,26 +153,94 @@
             </div>
           </div>
 
-          <!-- Reports -->
+          <a
+            href="purchase/purchase_home.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <i class="fa-solid fa-cart-shopping w-5"></i>
+            <span>Purchase</span>
+          </a>
+
+          <a
+            href="Payment/Payment.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <i class="fa-solid fa-credit-card w-5"></i>
+            <span>Payment</span>
+          </a>
+
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleDropdown('reportsSubmenu');"
           >
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-chart-line w-5"></i> <span>Reports</span>
             </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+            <i class="fa-solid fa-chevron-down text-xs" id="reportsChevron"></i>
           </a>
+          <div
+            id="reportsSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+              >Sales Report</a
+            >
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+              >Purchase Report</a
+            >
+          </div>
 
-          <!-- Configuration -->
           <a
-            href="#"
+            href="configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
           </a>
 
-          <!-- Other Menus ... -->
+          <div class="border-t border-gray-800 my-2 mx-4"></div>
+
+          <a
+            href="#"
+            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleDropdown('contactSubmenu');"
+          >
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-users w-5"></i>
+              Contact Management
+            </span>
+            <i class="fa-solid fa-chevron-down text-xs" id="contactChevron"></i>
+          </a>
+          <div
+            id="contactSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Customers</a>
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Suppliers</a>
+          </div>
+
+          <a
+            href="#"
+            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-bell w-5"></i>
+              <span>Notifications</span>
+            </div>
+            <span
+              class="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+              >01</span
+            >
+          </a>
+
+          <a
+            href="#"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <i class="fa-solid fa-comments w-5"></i>
+            <span>Chat with Visitors</span>
+          </a>
+
           <div class="mt-4">
             <a
               href="#"
@@ -186,11 +249,26 @@
               <i class="fa-solid fa-gear w-5"></i>
               <span>Application Settings</span>
             </a>
+
+            <a
+              href="#"
+              class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            >
+              <i class="fa-regular fa-circle-question w-5"></i>
+              <span>Get Technical Help</span>
+            </a>
+
+            <a
+              href="/login"
+              class="flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-red-800 hover:text-white transition"
+            >
+              <i class="fa-solid fa-right-from-bracket w-5"></i>
+              <span>Logout</span>
+            </a>
           </div>
         </nav>
       </div>
 
-      <!-- Footer Sidebar -->
       <div
         class="p-4 border-t border-gray-800 text-xs text-gray-500 text-center"
       >
@@ -199,9 +277,7 @@
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-1 flex flex-col h-screen overflow-y-auto">
-      <!-- HEADER -->
       <header
         class="h-16 bg-white shadow-sm flex items-center justify-between px-8 sticky top-0 z-10"
       >
@@ -231,9 +307,7 @@
         </div>
       </header>
 
-      <!-- CONTENT AREA -->
       <div class="p-8 max-w-5xl">
-        <!-- Breadcrumb & Title -->
         <div class="mb-6">
           <div
             class="text-gray-400 text-xl font-bold flex items-center gap-2 mb-2"
@@ -253,9 +327,7 @@
           </p>
         </div>
 
-        <!-- Form Container -->
         <form action="#" method="POST" class="space-y-6">
-          <!-- Row 1: Name & ID -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2"
@@ -279,7 +351,6 @@
             </div>
           </div>
 
-          <!-- Row 2: Group & Quantity -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <label class="block text-sm font-bold text-gray-700 mb-2"
@@ -311,7 +382,6 @@
             </div>
           </div>
 
-          <!-- Row 3: How to Use -->
           <div>
             <label class="block text-sm font-bold text-gray-700 mb-2"
               >How to Use</label
@@ -323,7 +393,6 @@
             ></textarea>
           </div>
 
-          <!-- Row 4: Side Effects -->
           <div>
             <label class="block text-sm font-bold text-gray-700 mb-2"
               >Side Effects</label
@@ -335,7 +404,6 @@
             ></textarea>
           </div>
 
-          <!-- Submit Button -->
           <div>
             <button
               type="button"
@@ -348,7 +416,67 @@
       </div>
     </main>
 
-    <!-- Script JS -->
-    <script src="js/script.js"></script>
+    <script>
+      // Function to toggle Dropdown/Submenu visibility
+      function toggleDropdown(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.classList.toggle('hidden');
+        }
+      }
+
+      // Live Clock (contoh sederhana)
+      function updateClock() {
+        const now = new Date();
+        const optionsDate = {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        };
+        const dateString = now.toLocaleDateString('en-US', optionsDate);
+        const timeString = now.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        });
+
+        const clockElement = document.getElementById('liveClock');
+        if (clockElement) {
+          clockElement.textContent = `${dateString} • ${timeString}`;
+        }
+      }
+
+      // Initial call and set interval
+      document.addEventListener('DOMContentLoaded', () => {
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Simple sub-menu toggle logic for sidebar
+        const inventoryLink = document.querySelector(
+          '.bg-teal-custom a:first-child'
+        );
+        const inventorySubmenu = document.getElementById('inventorySubmenu');
+        const inventoryChevron = document.getElementById('inventoryChevron');
+
+        if (inventoryLink && inventorySubmenu && inventoryChevron) {
+          inventoryLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            inventorySubmenu.classList.toggle('hidden');
+            if (inventorySubmenu.classList.contains('hidden')) {
+              inventoryChevron.classList.remove('fa-chevron-up');
+              inventoryChevron.classList.add('fa-chevron-down');
+            } else {
+              inventoryChevron.classList.remove('fa-chevron-down');
+              inventoryChevron.classList.add('fa-chevron-up');
+            }
+          });
+        }
+        
+        // Ensure other submenus (Reports, Contact) are hidden on load
+        document.getElementById('reportsSubmenu')?.classList.add('hidden');
+        document.getElementById('contactSubmenu')?.classList.add('hidden');
+      });
+    </script>
   </body>
 </html>

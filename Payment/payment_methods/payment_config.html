@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pharma One - Reports</title>
+    <title>Pharma One - Payment Configuration</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -18,57 +18,59 @@
     />
 
     <style>
+      /* Variabel Kustom Payment */
+      :root {
+        --payment-accent: #1d9e74;
+      }
       body {
         font-family: "Inter", sans-serif;
         background-color: #f6f8fb;
       }
-
-      /* Warna Custom */
       .bg-sidebar {
         background-color: #1a1a1a;
       }
-      .bg-teal-custom {
-        background-color: #009099;
+      /* Menggunakan warna teal/hijau sebagai pengganti merah di context Payment */
+      .bg-red-custom {
+        background-color: var(--payment-accent);
       }
       .text-teal-custom {
         color: #009099;
       }
-
       .sidebar-scroll::-webkit-scrollbar {
         width: 5px;
       }
       .sidebar-scroll::-webkit-scrollbar-thumb {
         background: #444;
       }
-
-      /* Card Borders & Colors */
-      .border-yellow-custom {
-        border-color: #fed600;
+      /* Override Tailwind red utilities inside Payment pages */
+      .border-red-500 {
+        border-color: var(--payment-accent) !important;
       }
-      .bg-yellow-light {
-        background-color: #fff6c3;
+      .text-red-500 {
+        color: var(--payment-accent) !important;
       }
-      .text-yellow-custom {
-        color: #fed600;
+      .bg-red-500 {
+        background-color: var(--payment-accent) !important;
       }
-
-      .border-green-custom {
-        border-color: #1d9e74;
+      .hover\:bg-red-600:hover {
+        background-color: var(--payment-accent) !important;
       }
-      .bg-green-light {
-        background-color: #a9dfd1;
+      .hover\:text-red-700:hover {
+        color: var(--payment-accent) !important;
       }
-      .text-green-custom {
-        color: #1d9e74;
+      .focus\:ring-red-500:focus {
+        box-shadow: 0 0 0 3px rgba(29, 158, 116, 0.18) !important;
       }
-      
-      /* Standard colors for interactive elements */
+      /* Menggunakan warna teal-500 untuk focus state input agar sesuai dengan Payment Accent */
+      .focus\:border-teal-500:focus {
+        border-color: var(--payment-accent);
+      }
       .focus\:ring-teal-500:focus {
-        box-shadow: 0 0 0 1px #009099;
-        border-color: #009099;
+        box-shadow: 0 0 0 1px var(--payment-accent);
+        border-color: var(--payment-accent);
       }
-      .border-teal-500 {
-        border-color: #009099;
+      .peer-checked\:bg-teal-500:checked {
+        background-color: var(--payment-accent);
       }
     </style>
   </head>
@@ -119,7 +121,7 @@
               <i class="fa-regular fa-circle-user text-gray-500"></i> My Profile
             </a>
             <a
-              href="/login"
+              href="#"
               class="block px-4 py-3 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3"
             >
               <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -131,7 +133,7 @@
           class="mt-4 flex flex-col gap-1 sidebar-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
         >
           <a
-            href="dashboard.html"
+            href="../../dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-table-columns w-5"></i>
@@ -159,62 +161,59 @@
             >
               </div>
           </div>
-          
+
           <a
-            href="purchase/purchase_home.html"
+            href="../../purchase/purchase_home.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-cart-shopping w-5"></i>
             <span>Purchase</span>
           </a>
 
-          <a
-            href="payment_home.html"
-            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-            onclick="event.preventDefault(); toggleSubmenu('paymentSubmenu', 'paymentChevron');"
-          >
-            <i class="fa-solid fa-credit-card w-5"></i>
-            <span>Payment</span>
-          </a>
-          <div
-            id="paymentSubmenu"
-            class="hidden pl-12 flex-col gap-1 bg-gray-900 text-gray-200 text-sm"
-          >
-            </div>
-
-          <div class="bg-teal-custom bg-opacity-90 border-l-4 border-yellow-400">
+          <div class="bg-red-custom bg-opacity-20 border-l-4 border-red-500">
             <a
-              href="reports.html"
-              class="flex items-center justify-between px-6 py-3 text-white font-medium"
-              onclick="event.preventDefault(); toggleSubmenu('reportsSubmenu', 'reportsChevron');"
+              href="../../payment_home.html"
+              class="flex items-center gap-3 px-6 py-3 text-white font-medium"
+              onclick="event.preventDefault(); toggleSubmenu('paymentSubmenu', 'paymentChevron');"
             >
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-chart-line w-5"></i>
-                <span>Reports</span>
-              </div>
-              <i class="fa-solid fa-chevron-up text-xs" id="reportsChevron"></i>
+              <i class="fa-solid fa-credit-card w-5"></i>
+              <span>Payment</span>
             </a>
-            <div
-              id="reportsSubmenu"
-              class="pl-12 flex flex-col gap-1 bg-gray-800/50"
-            >
+            <div class="pl-12 flex flex-col gap-1 bg-gray-800/50">
               <a
-                href="reports/sales_report.html"
-                class="py-2 text-xs text-yellow-400 font-semibold transition border-l-2 border-yellow-400 pl-2"
-              >
-                Sales Report
-              </a>
-              <a
-                href="reports/payment_report.html"
+                href="../payment_list/payment_list.html"
                 class="py-2 text-xs text-gray-300 hover:text-white transition"
+                >List Transactions</a
               >
-                Payments Report
-              </a>
+              <a
+                href="payment_config.html"
+                class="py-2 text-xs text-yellow-400 font-semibold transition border-l-2 border-yellow-400 pl-2"
+                >Payment Configurations</a
+              >
             </div>
           </div>
 
           <a
-            href="configurations.html"
+            href="#"
+            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleSubmenu('reportsSubmenu', 'reportsChevron');"
+          >
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-chart-line w-5"></i> <span>Reports</span>
+            </div>
+            <i
+              class="fa-solid fa-chevron-down text-xs"
+              id="reportsChevron"
+            ></i>
+          </a>
+          <div
+            id="reportsSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            </div>
+
+          <a
+            href="../../configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
@@ -222,34 +221,33 @@
 
           <div class="border-t border-gray-800 my-2 mx-4"></div>
 
-          <div>
-            <a
-              href="#"
-              class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-              onclick="event.preventDefault(); toggleSubmenu('contactSubmenu', 'contactChevron');"
-            >
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-users w-5"></i>
-                <span>Contact Management</span>
-              </div>
-              <i
-                class="fa-solid fa-chevron-down text-xs"
-                id="contactChevron"
-              ></i>
-            </a>
-            <div
-              id="contactSubmenu"
-              class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
-            >
-              </div>
-          </div>
+          <a
+            href="#"
+            class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleSubmenu('contactSubmenu', 'contactChevron');"
+          >
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-users w-5"></i>
+              Contact Management
+            </span>
+            <i
+              class="fa-solid fa-chevron-down text-xs"
+              id="contactChevron"
+            ></i>
+          </a>
+          <div
+            id="contactSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            </div>
 
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <div class="flex items-center gap-3">
-              <i class="fa-solid fa-bell w-5"></i> <span>Notifications</span>
+              <i class="fa-solid fa-bell w-5"></i>
+              <span>Notifications</span>
             </div>
             <span
               class="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full"
@@ -331,64 +329,117 @@
 
       <div class="p-8">
         <div class="mb-8">
-          <h1 class="text-2xl font-bold text-gray-800">Reports</h1>
+          <h1 class="text-2xl font-bold text-gray-800">
+            Payment Configurations
+          </h1>
           <p class="text-gray-500 text-sm mt-1">
-            Overall reports related to the pharmacy.
+            Manage tax, payment methods, and billing settings.
           </p>
         </div>
 
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl"
-        >
-          <div
-            class="bg-white rounded-lg shadow-sm border-2 border-yellow-custom flex flex-col h-56"
-          >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded border border-gray-200 shadow-sm p-0">
             <div
-              class="p-6 flex-1 flex flex-col items-center justify-center text-center"
+              class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50"
             >
-              <div class="text-yellow-custom text-4xl mb-3">
-                <i class="fa-solid fa-money-bill-trend-up"></i>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-800">Rs. 8,55,875</h3>
-              <p class="text-sm text-gray-800 font-medium mt-1">
-                Total Sales Report
-              </p>
+              <h3 class="font-bold text-gray-800">Available Methods</h3>
+              <button class="text-red-500 text-sm font-semibold hover:text-red-700">
+                <i class="fa-solid fa-plus mr-1"></i> Add New
+              </button>
             </div>
-            <a
-              href="reports/sales_report.html"
-              class="bg-yellow-light text-gray-800 text-xs font-semibold py-3 px-4 text-center hover:bg-yellow-200 transition flex items-center justify-center gap-2 border-t border-yellow-custom rounded-b-lg"
-            >
-              View Detailed Report <i class="fa-solid fa-angles-right"></i>
-            </a>
+            <div class="p-6 space-y-4 text-sm">
+              <div class="flex justify-between items-center border-b pb-3">
+                <span class="font-medium text-gray-800"
+                  ><i class="fa-solid fa-money-bill mr-2"></i> Cash / Tunai</span
+                >
+                <span class="text-xs font-semibold text-green-500">Enabled</span>
+              </div>
+              <div class="flex justify-between items-center border-b pb-3">
+                <span class="font-medium text-gray-800"
+                  ><i class="fa-brands fa-cc-mastercard mr-2"></i> Card
+                  (Visa/Mastercard)</span
+                >
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" value="" class="sr-only peer" checked />
+                  <div
+                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-500"
+                  ></div>
+                </label>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-medium text-gray-800"
+                  ><i class="fa-solid fa-building-columns mr-2"></i> Bank Transfer
+                  (BCA)</span
+                >
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" value="" class="sr-only peer" />
+                  <div
+                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-500"
+                  ></div>
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div
-            class="bg-white rounded-lg shadow-sm border-2 border-green-custom flex flex-col h-56"
-          >
+          <div class="bg-white rounded border border-gray-200 shadow-sm p-0">
             <div
-              class="p-6 flex-1 flex flex-col items-center justify-center text-center"
+              class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50"
             >
-              <div class="text-green-custom text-4xl mb-3">
-                <i class="fa-solid fa-file-invoice"></i>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-800">523</h3>
-              <p class="text-sm text-gray-800 font-medium mt-1">
-                Payments Received (Transactions)
-              </p>
+              <h3 class="font-bold text-gray-800">Tax & Fees</h3>
+              <button
+                class="text-red-500 text-sm font-semibold hover:text-red-700"
+              >
+                <i class="fa-solid fa-save mr-1"></i> Save Changes
+              </button>
             </div>
-            <a
-              href="reports/payment_report.html"
-              class="bg-green-light text-gray-800 text-xs font-semibold py-3 px-4 text-center hover:bg-green-200 transition flex items-center justify-center gap-2 border-t border-green-custom rounded-b-lg"
-            >
-              View Detailed Report <i class="fa-solid fa-angles-right"></i>
-            </a>
+            <div class="p-6 space-y-4">
+              <div>
+                <label
+                  for="taxRate"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >VAT/PPN Rate (%)</label
+                >
+                <input
+                  type="number"
+                  id="taxRate"
+                  value="11"
+                  class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500 text-sm p-2"
+                />
+              </div>
+              <div>
+                <label
+                  for="currency"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Default Currency</label
+                >
+                <select
+                  id="currency"
+                  class="w-full border-gray-300 rounded-md shadow-sm focus:border-teal-500 focus:ring-teal-500 text-sm p-2"
+                >
+                  <option>IDR - Indonesian Rupiah</option>
+                  <option>USD - US Dollar</option>
+                </select>
+              </div>
+              <div class="flex items-center pt-2">
+                <input
+                  id="lateFee"
+                  type="checkbox"
+                  class="w-4 h-4 text-red-500 border-gray-300 rounded focus:ring-red-500"
+                />
+                <label
+                  for="lateFee"
+                  class="ml-2 text-sm font-medium text-gray-700"
+                  >Apply Late Payment Fee (5%)</label
+                >
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </main>
-
+    
     <script>
-      // Function to toggle Dropdown visibility
+      // Function to toggle Dropdown/Submenu visibility
       function toggleDropdown(id) {
         const element = document.getElementById(id);
         if (element) {
@@ -396,29 +447,31 @@
         }
       }
 
-      // Function to toggle Submenu visibility
       function toggleSubmenu(submenuId, chevronId) {
         const submenu = document.getElementById(submenuId);
         const chevron = document.getElementById(chevronId);
-
+        
+        // Logic untuk submenus yang tidak selalu terbuka (Inventory, Reports, Contact)
         if (submenu.classList.contains('hidden')) {
+          // Open submenu
           submenu.classList.remove('hidden');
           submenu.classList.add('flex');
-          if (chevron) {
-            chevron.classList.remove('fa-chevron-down');
-            chevron.classList.add('fa-chevron-up');
+          if(chevron) {
+             chevron.classList.remove('fa-chevron-down');
+             chevron.classList.add('fa-chevron-up');
           }
         } else {
+          // Close submenu
           submenu.classList.add('hidden');
           submenu.classList.remove('flex');
-          if (chevron) {
-            chevron.classList.remove('fa-chevron-up');
-            chevron.classList.add('fa-chevron-down');
+           if(chevron) {
+             chevron.classList.remove('fa-chevron-up');
+             chevron.classList.add('fa-chevron-down');
           }
         }
       }
 
-      // Live Clock
+      // Live Clock (contoh sederhana)
       function updateClock() {
         const now = new Date();
         const optionsDate = {
@@ -446,37 +499,31 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // Isi konten submenu yang bersifat dinamis (sesuai navigasi yang diinginkan)
+        // Isi konten submenu yang bersifat dinamis (placeholder)
         const inventorySubmenu = document.getElementById('inventorySubmenu');
         if (inventorySubmenu) {
-             inventorySubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="inventory/inventory_list.html">List of Medicines</a>
-                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="inventory/medicine_groups.html">Medicine Groups</a>`;
+             inventorySubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="../../inventory/inventory_list.html">List of Medicines</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="../../inventory/medicine_groups.html">Medicine Groups</a>`;
         }
 
-        const paymentSubmenu = document.getElementById('paymentSubmenu');
-        if (paymentSubmenu) {
-            paymentSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="payment_list/payment_list.html">List Transactions</a>
-                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="payment_methods/payment_config.html">Payment Configurations</a>`;
+        const reportsSubmenu = document.getElementById('reportsSubmenu');
+        if (reportsSubmenu) {
+          reportsSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Sales Report</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Purchase Report</a>`;
         }
-        
+
         const contactSubmenu = document.getElementById('contactSubmenu');
         if (contactSubmenu) {
           contactSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Customers</a>
                                         <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Suppliers</a>`;
         }
-
-        // Atur agar submenu Reports tetap terbuka secara default pada halaman ini
-        const reportsSubmenu = document.getElementById('reportsSubmenu');
-        const reportsChevron = document.getElementById('reportsChevron');
-        if (reportsSubmenu) {
-             reportsSubmenu.classList.remove('hidden');
-             reportsSubmenu.classList.add('flex');
+        
+        // Atur agar submenu Payment tetap terbuka secara default pada halaman ini
+        const paymentSubmenu = document.getElementById('paymentSubmenu');
+        if (paymentSubmenu) {
+             paymentSubmenu.classList.remove('hidden');
+             paymentSubmenu.classList.add('flex');
         }
-        if (reportsChevron) {
-             reportsChevron.classList.remove('fa-chevron-down');
-             reportsChevron.classList.add('fa-chevron-up');
-        }
-
       });
     </script>
   </body>

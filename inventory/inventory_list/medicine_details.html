@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharma One - Medicine Details</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <!-- Google Font Inter -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -46,11 +43,9 @@
     </style>
   </head>
   <body class="flex h-screen overflow-hidden">
-    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-sidebar text-white flex flex-col justify-between hidden md:flex shrink-0"
     >
-      <!-- Logo -->
       <div>
         <div
           class="h-16 flex items-center justify-center border-b border-gray-800"
@@ -63,7 +58,6 @@
           </div>
         </div>
 
-        <!-- User Profile -->
         <div class="px-6 py-6 border-b border-gray-800 relative">
           <div class="flex items-center gap-3">
             <img
@@ -84,7 +78,6 @@
               ></i>
             </button>
           </div>
-          <!-- Dropdown User -->
           <div
             id="userDropdown"
             class="hidden absolute left-14 top-14 w-48 bg-white rounded-md shadow-xl z-50 overflow-hidden border border-gray-200"
@@ -104,11 +97,9 @@
           </div>
         </div>
 
-        <!-- Navigation Menu -->
         <nav
           class="mt-4 flex flex-col gap-1 sidebar-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
         >
-          <!-- Dashboard (Non-Active) -->
           <a
             href="dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -117,21 +108,25 @@
             <span>Dashboard</span>
           </a>
 
-          <!-- Inventory (ACTIVE & OPEN) -->
           <div class="bg-teal-custom">
             <a
-              href="inventory.html"
+              href="#"
               class="flex items-center justify-between px-6 py-3 text-white font-medium"
+              onclick="event.preventDefault(); toggleDropdown('inventorySubmenu');"
             >
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-boxes-stacked w-5"></i>
                 <span>Inventory</span>
               </div>
-              <i class="fa-solid fa-chevron-up text-xs"></i>
+              <i
+                class="fa-solid fa-chevron-up text-xs"
+                id="inventoryChevron"
+              ></i>
             </a>
-            <!-- Submenu -->
-            <div class="bg-[#1A1A1A] bg-opacity-50 pb-2">
-              <!-- List of Medicines: ACTIVE SUBMENU -->
+            <div
+              id="inventorySubmenu"
+              class="flex flex-col bg-[#1A1A1A] bg-opacity-50 pb-2"
+            >
               <a
                 href="inventory_list.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-teal-custom bg-white bg-opacity-10 font-medium border-r-4 border-teal-500"
@@ -147,20 +142,46 @@
             </div>
           </div>
 
-          <!-- Reports -->
+          <a
+            href="purchase/purchase_home.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <i class="fa-solid fa-cart-shopping w-5"></i>
+            <span>Purchase</span>
+          </a>
+
+          <a
+            href="Payment/Payment.html"
+            class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          >
+            <i class="fa-solid fa-credit-card w-5"></i>
+            <span>Payment</span>
+          </a>
+
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleDropdown('reportsSubmenu');"
           >
             <div class="flex items-center gap-3">
               <i class="fa-solid fa-chart-line w-5"></i> <span>Reports</span>
             </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+            <i class="fa-solid fa-chevron-down text-xs" id="reportsChevron"></i>
           </a>
+          <div
+            id="reportsSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+              >Sales Report</a
+            >
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#"
+              >Purchase Report</a
+            >
+          </div>
 
-          <!-- Configuration -->
           <a
-            href="#"
+            href="configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
@@ -168,25 +189,32 @@
 
           <div class="border-t border-gray-800 my-2 mx-4"></div>
 
-          <!-- Contact Management -->
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
+            onclick="event.preventDefault(); toggleDropdown('contactSubmenu');"
           >
-            <div class="flex items-center gap-3">
+            <span class="flex items-center gap-3">
               <i class="fa-solid fa-users w-5"></i>
-              <span>Contact Management</span>
-            </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+              Contact Management
+            </span>
+            <i class="fa-solid fa-chevron-down text-xs" id="contactChevron"></i>
           </a>
+          <div
+            id="contactSubmenu"
+            class="hidden flex-col bg-gray-900 text-gray-200 text-sm"
+          >
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Customers</a>
+            <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Suppliers</a>
+          </div>
 
-          <!-- Notifications -->
           <a
             href="#"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <div class="flex items-center gap-3">
-              <i class="fa-solid fa-bell w-5"></i> <span>Notifications</span>
+              <i class="fa-solid fa-bell w-5"></i>
+              <span>Notifications</span>
             </div>
             <span
               class="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full"
@@ -194,7 +222,6 @@
             >
           </a>
 
-          <!-- Chat -->
           <a
             href="#"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
@@ -203,7 +230,6 @@
             <span>Chat with Visitors</span>
           </a>
 
-          <!-- Settings Section -->
           <div class="mt-4">
             <a
               href="#"
@@ -216,20 +242,21 @@
               href="#"
               class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
             >
-              <i class="fa-solid fa-virus-covid w-5"></i> <span>Covid -19</span>
-            </a>
-            <a
-              href="#"
-              class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
-            >
               <i class="fa-regular fa-circle-question w-5"></i>
               <span>Get Technical Help</span>
+            </a>
+
+            <a
+              href="/login"
+              class="flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-red-800 hover:text-white transition"
+            >
+              <i class="fa-solid fa-right-from-bracket w-5"></i>
+              <span>Logout</span>
             </a>
           </div>
         </nav>
       </div>
 
-      <!-- Footer Sidebar -->
       <div
         class="p-4 border-t border-gray-800 text-xs text-gray-500 text-center"
       >
@@ -238,9 +265,7 @@
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-1 flex flex-col h-screen overflow-y-auto">
-      <!-- HEADER -->
       <header
         class="h-16 bg-white shadow-sm flex items-center justify-between px-8 sticky top-0 z-10"
       >
@@ -270,12 +295,9 @@
         </div>
       </header>
 
-      <!-- CONTENT AREA -->
       <div class="p-8">
-        <!-- Breadcrumb & Header -->
         <div class="flex justify-between items-start mb-6">
           <div>
-            <!-- Breadcrumb Navigation -->
             <div class="text-gray-400 text-xl mb-1 flex items-center gap-2">
               <span class="font-bold">Inventory</span>
               <span>›</span>
@@ -290,7 +312,6 @@
             </p>
           </div>
 
-          <!-- Edit Button -->
           <button
             class="bg-[#03A9F5] hover:bg-blue-500 text-white px-5 py-2.5 rounded shadow-sm text-sm font-medium transition flex items-center gap-2"
           >
@@ -298,7 +319,6 @@
           </button>
         </div>
 
-        <!-- Search in Detail -->
         <div class="mb-6">
           <div class="relative w-80">
             <input
@@ -312,22 +332,20 @@
           </div>
         </div>
 
-        <!-- GRID INFO CARDS -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <!-- Card 1: Medicine Info -->
           <div class="bg-white rounded border border-gray-200 shadow-sm">
             <div class="px-6 py-4 border-b border-gray-100">
               <h3 class="font-bold text-gray-800">Medicine</h3>
             </div>
             <div class="p-6 flex">
               <div class="w-1/2">
-                <h4 class="text-2xl font-bold text-gray-800">298</h4>
+                <h4 class="text-2xl font-bold text-gray-800">D06ID232435451</h4>
                 <p class="text-sm text-gray-800 mt-1 font-medium">
                   Medicine ID
                 </p>
               </div>
               <div class="w-1/2">
-                <h4 class="text-2xl font-bold text-gray-800">24</h4>
+                <h4 class="text-2xl font-bold text-gray-800">Generic Medicine</h4>
                 <p class="text-sm text-gray-800 mt-1 font-medium">
                   Medicine Group
                 </p>
@@ -335,7 +353,6 @@
             </div>
           </div>
 
-          <!-- Card 2: Inventory in Qty -->
           <div class="bg-white rounded border border-gray-200 shadow-sm">
             <div
               class="px-6 py-4 border-b border-gray-100 flex justify-between items-center"
@@ -350,26 +367,25 @@
             </div>
             <div class="p-6 flex justify-between">
               <div class="text-center md:text-left">
-                <h4 class="text-2xl font-bold text-gray-800">298</h4>
+                <h4 class="text-2xl font-bold text-gray-800">300</h4>
                 <p class="text-sm text-gray-800 mt-1 font-medium">
                   Lifetime Supply
                 </p>
               </div>
               <div class="text-center md:text-left">
-                <h4 class="text-2xl font-bold text-gray-800">290</h4>
+                <h4 class="text-2xl font-bold text-gray-800">280</h4>
                 <p class="text-sm text-gray-800 mt-1 font-medium">
                   Lifetime Sales
                 </p>
               </div>
               <div class="text-center md:text-left">
-                <h4 class="text-2xl font-bold text-gray-800">08</h4>
+                <h4 class="text-2xl font-bold text-gray-800">20</h4>
                 <p class="text-sm text-gray-800 mt-1 font-medium">Stock Left</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ROW 2: How to use -->
         <div class="bg-white rounded border border-gray-200 shadow-sm mb-6">
           <div class="px-6 py-4 border-b border-gray-100">
             <h3 class="font-bold text-gray-800">How to use</h3>
@@ -382,7 +398,6 @@
           </div>
         </div>
 
-        <!-- ROW 3: Side Effects -->
         <div class="bg-white rounded border border-gray-200 shadow-sm mb-8">
           <div class="px-6 py-4 border-b border-gray-100">
             <h3 class="font-bold text-gray-800">Side Effects</h3>
@@ -397,7 +412,6 @@
           </div>
         </div>
 
-        <!-- DELETE BUTTON AREA -->
         <div>
           <button
             class="border border-[#F0483E] text-[#F0483E] bg-white hover:bg-red-50 px-5 py-2.5 rounded shadow-sm text-sm font-medium transition flex items-center gap-2"
@@ -408,7 +422,106 @@
       </div>
     </main>
 
-    <!-- Script JS -->
-    <script src="js/script.js"></script>
+    <script>
+      // Function to toggle Dropdown/Submenu visibility
+      function toggleDropdown(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          if (id === 'userDropdown') {
+            element.classList.toggle('hidden');
+            return;
+          }
+
+          element.classList.toggle('hidden');
+          const chevronId = id.replace('Submenu', 'Chevron');
+          const chevron = document.getElementById(chevronId);
+          if (chevron) {
+            if (element.classList.contains('hidden')) {
+              chevron.classList.remove('fa-chevron-up');
+              chevron.classList.add('fa-chevron-down');
+            } else {
+              chevron.classList.remove('fa-chevron-down');
+              chevron.classList.add('fa-chevron-up');
+            }
+          }
+        }
+      }
+
+      // Live Clock (contoh sederhana)
+      function updateClock() {
+        const now = new Date();
+        const optionsDate = {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        };
+        const dateString = now.toLocaleDateString('en-US', optionsDate);
+        const timeString = now.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        });
+
+        const clockElement = document.getElementById('liveClock');
+        if (clockElement) {
+          clockElement.textContent = `${dateString} • ${timeString}`;
+        }
+      }
+
+      // Initial call and set interval
+      document.addEventListener('DOMContentLoaded', () => {
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Ensure Reports and Contact submenus are created and hidden
+        // (This simulates the structure from the previous step)
+        const reportsLink = document.querySelector(
+          'a[href="#"]:has(.fa-chart-line)'
+        );
+        if (reportsLink) {
+          const reportsSubmenu = document.createElement('div');
+          reportsSubmenu.id = 'reportsSubmenu';
+          reportsSubmenu.classList.add(
+            'hidden',
+            'flex-col',
+            'bg-gray-900',
+            'text-gray-200',
+            'text-sm'
+          );
+          reportsSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Sales Report</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Purchase Report</a>`;
+          reportsLink.setAttribute(
+            'onclick',
+            "event.preventDefault(); toggleDropdown('reportsSubmenu');"
+          );
+          reportsLink.querySelector('.fa-chevron-down').id = 'reportsChevron';
+          reportsLink.insertAdjacentElement('afterend', reportsSubmenu);
+        }
+
+        const contactLink = document.querySelector(
+          'a[href="#"]:has(.fa-users)'
+        );
+        if (contactLink) {
+          const contactSubmenu = document.createElement('div');
+          contactSubmenu.id = 'contactSubmenu';
+          contactSubmenu.classList.add(
+            'hidden',
+            'flex-col',
+            'bg-gray-900',
+            'text-gray-200',
+            'text-sm'
+          );
+          contactSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Customers</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Suppliers</a>`;
+          contactLink.setAttribute(
+            'onclick',
+            "event.preventDefault(); toggleDropdown('contactSubmenu');"
+          );
+          contactLink.querySelector('.fa-chevron-down').id = 'contactChevron';
+          contactLink.insertAdjacentElement('afterend', contactSubmenu);
+        }
+      });
+    </script>
   </body>
 </html>
