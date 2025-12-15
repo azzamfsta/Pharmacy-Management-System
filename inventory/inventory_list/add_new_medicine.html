@@ -121,7 +121,7 @@
         >
           <!-- Dashboard (Non-Active) -->
           <a
-            href="dashboard.html"
+            href="../../dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-table-columns w-5"></i>
@@ -131,7 +131,7 @@
           <!-- Inventory (ACTIVE & OPEN) -->
           <div class="bg-teal-custom">
             <a
-              href="inventory.html"
+              href="../inventory_home.html"
               class="flex items-center justify-between px-6 py-3 text-white font-medium"
             >
               <div class="flex items-center gap-3">
@@ -160,7 +160,7 @@
 
           <!-- Reports -->
           <a
-            href="#"
+            href="../../reports/reports.html"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <div class="flex items-center gap-3">
@@ -171,7 +171,7 @@
 
           <!-- Configuration -->
           <a
-            href="#"
+            href="../../configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
@@ -180,7 +180,7 @@
           <!-- Other Menus ... -->
           <div class="mt-4">
             <a
-              href="#"
+              href="../../configurations.html"
               class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
             >
               <i class="fa-solid fa-gear w-5"></i>
@@ -254,7 +254,7 @@
         </div>
 
         <!-- Form Container -->
-        <form action="#" method="POST" class="space-y-6">
+        <form id="addMedicineForm" class="space-y-6">
           <!-- Row 1: Name & ID -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -262,6 +262,7 @@
                 >Medicine Name</label
               >
               <input
+                id="medName"
                 type="text"
                 class="w-full p-3 rounded border border-gray-300 form-input focus:outline-none focus:ring-1 focus:ring-teal-500 transition"
                 placeholder="Enter medicine name"
@@ -272,6 +273,7 @@
                 >Medicine ID</label
               >
               <input
+                id="medId"
                 type="text"
                 class="w-full p-3 rounded border border-gray-300 form-input focus:outline-none focus:ring-1 focus:ring-teal-500 transition"
                 placeholder="Enter medicine ID"
@@ -287,6 +289,7 @@
               >
               <div class="relative">
                 <select
+                  id="medGroup"
                   class="w-full p-3 rounded border border-gray-300 form-input focus:outline-none focus:ring-1 focus:ring-teal-500 appearance-none cursor-pointer"
                 >
                   <option>- Select Group -</option>
@@ -304,6 +307,7 @@
                 >Quantity in Number</label
               >
               <input
+                id="medQty"
                 type="number"
                 class="w-full p-3 rounded border border-gray-300 form-input focus:outline-none focus:ring-1 focus:ring-teal-500 transition"
                 placeholder="Enter quantity"
@@ -317,6 +321,7 @@
               >How to Use</label
             >
             <textarea
+              id="medHowToUse"
               rows="4"
               class="w-full p-3 rounded border border-gray-300 form-input focus:outline-none focus:ring-1 focus:ring-teal-500 transition resize-none"
               placeholder="Enter usage instructions..."
@@ -329,6 +334,7 @@
               >Side Effects</label
             >
             <textarea
+              id="medSideEffects"
               rows="4"
               class="w-full p-3 rounded border border-gray-300 form-input focus:outline-none focus:ring-1 focus:ring-teal-500 transition resize-none"
               placeholder="Enter side effects..."
@@ -338,7 +344,7 @@
           <!-- Submit Button -->
           <div>
             <button
-              type="button"
+              type="submit"
               class="bg-[#F0483E] hover:bg-red-600 text-white font-bold py-3 px-8 rounded shadow-sm transition"
             >
               Save Details
@@ -349,6 +355,6 @@
     </main>
 
     <!-- Script JS -->
-    <script src="js/script.js"></script>
+    <script src="../../js/script.js"></script>
   </body>
 </html>

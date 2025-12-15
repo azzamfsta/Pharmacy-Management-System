@@ -116,7 +116,7 @@
         >
           <!-- Dashboard (Non-Active) -->
           <a
-            href="dashboard.html"
+            href="../../dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-table-columns w-5"></i>
@@ -126,7 +126,7 @@
           <!-- Inventory (ACTIVE & OPEN) -->
           <div class="bg-teal-custom">
             <a
-              href="inventory.html"
+              href="../inventory_home.html"
               class="flex items-center justify-between px-6 py-3 text-white font-medium"
             >
               <div class="flex items-center gap-3">
@@ -139,13 +139,13 @@
             <div class="bg-[#1A1A1A] bg-opacity-50 pb-2">
               <!-- List of Medicines: ACTIVE SUBMENU (Teal text) -->
               <a
-                href="#"
+                href="inventory_list.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-teal-custom bg-white bg-opacity-10 font-medium border-r-4 border-teal-500"
               >
                 <span>List of Medicines</span>
               </a>
               <a
-                href="#"
+                href="../inventory_medicine_groups/inventory_medicine_groups.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-gray-400 hover:text-white"
               >
                 <span>Medicine Groups</span>
@@ -155,7 +155,7 @@
 
           <!-- Reports -->
           <a
-            href="#"
+            href="../../reports/reports.html"
             class="flex items-center justify-between px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <div class="flex items-center gap-3">
@@ -166,7 +166,7 @@
 
           <!-- Configuration -->
           <a
-            href="#"
+            href="../../configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
@@ -212,7 +212,7 @@
           <!-- Settings Section -->
           <div class="mt-4">
             <a
-              href="#"
+              href="../../configurations.html"
               class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
             >
               <i class="fa-solid fa-gear w-5"></i>
@@ -283,26 +283,28 @@
           <div>
             <h1 class="text-2xl font-bold text-gray-800">
               Inventory
-              <span class="text-gray-400 text-xl font-normal"
-                >› List of Medicines (298)</span
-              >
+              <span class="text-gray-400 text-xl font-normal">› List of Medicines (<span id="totalMedicinesCount">0</span>)</span>
             </h1>
             <p class="text-gray-500 text-sm mt-1">
               List of medicines available for sales.
             </p>
           </div>
 
-          <button
-            class="bg-[#F0483E] hover:bg-red-600 text-white px-5 py-2.5 rounded shadow-sm text-sm font-medium transition flex items-center gap-2"
+          <a
+            id="btnAddNewItem"
+            href="add_new_medicine.html"
+            role="button"
+            class="bg-[#F0483E] hover:bg-red-600 text-white px-5 py-2.5 rounded shadow-sm text-sm font-medium transition inline-flex items-center gap-2"
           >
             <i class="fa-solid fa-plus"></i> Add New Item
-          </button>
+          </a>
         </div>
 
         <!-- Filters & Search Toolbar -->
         <div class="flex justify-between items-center mb-4">
           <div class="relative w-80">
             <input
+              id="searchMedicineInput"
               type="text"
               placeholder="Search Medicine Inventory.."
               class="w-full bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
@@ -319,6 +321,7 @@
               <i class="fa-solid fa-filter"></i>
             </button>
             <select
+              id="groupFilter"
               class="bg-white border border-gray-300 text-gray-700 text-sm rounded-md focus:ring-teal-500 focus:border-teal-500 block w-48 p-2"
             >
               <option>- Select Group -</option>
@@ -356,141 +359,7 @@
                 <th scope="col" class="px-6 py-4">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <!-- Row 1 -->
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Augmentin 625 Duo Tablet
-                </td>
-                <td class="px-6 py-4">D06ID232435454</td>
-                <td class="px-6 py-4">Generic Medicine</td>
-                <td class="px-6 py-4">350</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
-              <!-- Row 2 -->
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Azithral 500 Tablet
-                </td>
-                <td class="px-6 py-4">D06ID232435451</td>
-                <td class="px-6 py-4">Generic Medicine</td>
-                <td class="px-6 py-4">20</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
-              <!-- Row 3 -->
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Ascoril LS Syrup
-                </td>
-                <td class="px-6 py-4">D06ID232435452</td>
-                <td class="px-6 py-4">Diabetes</td>
-                <td class="px-6 py-4">85</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
-              <!-- Row 4 -->
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Azee 500 Tablet
-                </td>
-                <td class="px-6 py-4">D06ID232435450</td>
-                <td class="px-6 py-4">Generic Medicine</td>
-                <td class="px-6 py-4">75</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
-              <!-- Row 5 -->
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Allegra 120mg Tablet
-                </td>
-                <td class="px-6 py-4">D06ID232435455</td>
-                <td class="px-6 py-4">Diabetes</td>
-                <td class="px-6 py-4">44</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
-              <!-- Row 6 -->
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">Alex Syrup</td>
-                <td class="px-6 py-4">D06ID232435456</td>
-                <td class="px-6 py-4">Generic Medicine</td>
-                <td class="px-6 py-4">65</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
-              <!-- Row 7 -->
-              <tr class="bg-white border-b border-gray-100 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Amoxyclav 625 Tablet
-                </td>
-                <td class="px-6 py-4">D06ID232435457</td>
-                <td class="px-6 py-4">Generic Medicine</td>
-                <td class="px-6 py-4">150</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
-              <!-- Row 8 -->
-              <tr class="bg-white hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900">
-                  Avil 25 Tablet
-                </td>
-                <td class="px-6 py-4">D06ID232435458</td>
-                <td class="px-6 py-4">Generic Medicine</td>
-                <td class="px-6 py-4">270</td>
-                <td class="px-6 py-4">
-                  <a
-                    href="#"
-                    class="text-gray-600 hover:text-teal-600 font-medium text-xs flex items-center gap-1"
-                  >
-                    View Full Detail <i class="fa-solid fa-angles-right"></i>
-                  </a>
-                </td>
-              </tr>
+            <tbody id="medicineTbody">
             </tbody>
           </table>
 
@@ -523,6 +392,6 @@
     </main>
 
     <!-- Script JS -->
-    <script src="js/script.js"></script>
+    <script src="../../js/script.js"></script>
   </body>
 </html>
