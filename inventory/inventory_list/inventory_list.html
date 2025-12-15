@@ -107,7 +107,7 @@
           class="mt-4 flex flex-col gap-1 sidebar-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
         >
           <a
-            href="dashboard.html"
+            href="../../dashboard.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-table-columns w-5"></i>
@@ -134,13 +134,13 @@
               class="flex flex-col bg-[#1A1A1A] bg-opacity-50 pb-2"
             >
               <a
-                href="#"
+                href="inventory_list.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-teal-custom bg-white bg-opacity-10 font-medium border-r-4 border-teal-500"
               >
                 <span>List of Medicines</span>
               </a>
               <a
-                href="#"
+                href="../inventory_medicine_groups/inventory_medicine_groups.html"
                 class="flex items-center gap-3 pl-14 pr-6 py-2 text-sm text-gray-400 hover:text-white"
               >
                 <span>Medicine Groups</span>
@@ -238,7 +238,7 @@
 
           <div class="mt-4">
             <a
-              href="#"
+              href="../../configurations.html"
               class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
             >
               <i class="fa-solid fa-gear w-5"></i>
@@ -306,25 +306,27 @@
           <div>
             <h1 class="text-2xl font-bold text-gray-800">
               Inventory
-              <span class="text-gray-400 text-xl font-normal"
-                >› List of Medicines (298)</span
-              >
+              <span class="text-gray-400 text-xl font-normal">› List of Medicines (<span id="totalMedicinesCount">0</span>)</span>
             </h1>
             <p class="text-gray-500 text-sm mt-1">
               List of medicines available for sales.
             </p>
           </div>
 
-          <button
-            class="bg-[#F0483E] hover:bg-red-600 text-white px-5 py-2.5 rounded shadow-sm text-sm font-medium transition flex items-center gap-2"
+          <a
+            id="btnAddNewItem"
+            href="add_new_medicine.html"
+            role="button"
+            class="bg-[#F0483E] hover:bg-red-600 text-white px-5 py-2.5 rounded shadow-sm text-sm font-medium transition inline-flex items-center gap-2"
           >
             <i class="fa-solid fa-plus"></i> Add New Item
-          </button>
+          </a>
         </div>
 
         <div class="flex justify-between items-center mb-4">
           <div class="relative w-80">
             <input
+              id="searchMedicineInput"
               type="text"
               placeholder="Search Medicine Inventory.."
               class="w-full bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
@@ -341,6 +343,7 @@
               <i class="fa-solid fa-filter"></i>
             </button>
             <select
+              id="groupFilter"
               class="bg-white border border-gray-300 text-gray-700 text-sm rounded-md focus:ring-teal-500 focus:border-teal-500 block w-48 p-2"
             >
               <option>- Select Group -</option>
