@@ -194,7 +194,7 @@
             </div>
 
           <a
-            href="configurations.html"
+            href="../configurations.html"
             class="flex items-center gap-3 px-6 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition"
           >
             <i class="fa-solid fa-sliders w-5"></i> <span>Configuration</span>
@@ -315,11 +315,12 @@
             </p>
           </div>
 
-          <button
+          <a
+            href="inventory_list/add_new_medicine.html"
             class="bg-[#F0483E] hover:bg-red-600 text-white px-5 py-2.5 rounded shadow-sm text-sm font-medium transition flex items-center gap-2"
           >
-            <i class="fa-solid fa-plus"></i> Add New Item
-          </button>
+            <i class="fa-solid fa-plus"></i> Add New Medicine
+          </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -338,10 +339,10 @@
               </p>
             </div>
             <a
-              href="inventory_list.html"
+              href="inventory_list/inventory_list.html"
               class="bg-blue-light text-gray-700 text-xs font-semibold py-2.5 px-4 text-center hover:bg-blue-200 transition flex items-center justify-center gap-2 border-t border-blue-custom rounded-b-lg"
             >
-              View Full List <i class="fa-solid fa-angles-right"></i>
+              Visit Inventory <i class="fa-solid fa-angles-right"></i>
             </a>
           </div>
 
@@ -358,10 +359,10 @@
               <p class="text-sm text-gray-800 font-medium">Medicine Groups</p>
             </div>
             <a
-              href="medicine_groups.html"
+              href="inventory_medicine_groups/group_details.html"
               class="bg-green-light text-gray-700 text-xs font-semibold py-2.5 px-4 text-center hover:bg-green-200 transition flex items-center justify-center gap-2 border-t border-green-custom rounded-b-lg"
             >
-              View Groups <i class="fa-solid fa-angles-right"></i>
+              Group Details <i class="fa-solid fa-angles-right"></i>
             </a>
           </div>
 
@@ -378,7 +379,7 @@
               <p class="text-sm text-gray-800 font-medium">Medicine Shortage</p>
             </div>
             <a
-              href="#"
+              href="inventory_list/add_new_medicine.html"
               class="bg-red-light text-gray-700 text-xs font-semibold py-2.5 px-4 text-center hover:bg-red-200 transition flex items-center justify-center gap-2 border-t border-red-custom rounded-b-lg"
             >
               Resolve Now <i class="fa-solid fa-angles-right"></i>
@@ -449,8 +450,8 @@
         // Ensure Reports and Contact submenus are created and hidden
         const reportsSubmenu = document.getElementById('reportsSubmenu');
         if (reportsSubmenu) {
-          reportsSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Sales Report</a>
-                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="#">Purchase Report</a>`;
+          reportsSubmenu.innerHTML = `<a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="../reports/sales_report.html">Sales Report</a>
+                                        <a class="pl-14 pr-6 py-2 hover:bg-gray-800" href="../reports/purchase_report.html">Purchase Report</a>`;
         }
 
         const contactSubmenu = document.getElementById('contactSubmenu');
