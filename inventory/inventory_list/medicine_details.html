@@ -89,7 +89,8 @@
               <i class="fa-regular fa-circle-user text-gray-500"></i> My Profile
             </a>
             <a
-              href="#"
+              href="/Login/login.html"
+              onclick="event.preventDefault(); sessionStorage.removeItem('isLoggedIn'); window.location.href='/Login/login.html';"
               class="block px-4 py-3 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3"
             >
               <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -247,7 +248,8 @@
             </a>
 
             <a
-              href="/login"
+              href="/Login/login.html"
+              onclick="event.preventDefault(); sessionStorage.removeItem('isLoggedIn'); window.location.href='/Login/login.html';"
               class="flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-red-800 hover:text-white transition"
             >
               <i class="fa-solid fa-right-from-bracket w-5"></i>

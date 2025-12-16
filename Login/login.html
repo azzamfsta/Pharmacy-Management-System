@@ -50,7 +50,7 @@
       </div>
 
       <div class="bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
-        <form action="/dashboard" method="POST">
+        <form id="loginForm" action="#" method="POST">
           <div class="mb-5">
             <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username / Email</label>
             <div class="relative">
@@ -111,5 +111,29 @@
         Pharma One Management System v 1.1.2
       </p>
     </div>
+
+    <script>
+      // Simple client-side login: redirect to dashboard when username & password are filled
+      document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('loginForm');
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const username = (document.getElementById('username') || {}).value || '';
+          const password = (document.getElementById('password') || {}).value || '';
+
+          if (username.trim() && password.trim()) {
+            // Optionally store a flag in sessionStorage to simulate a logged-in user
+            sessionStorage.setItem('isLoggedIn', '1');
+            // Redirect to dashboard (relative path from /Login/ => ../dashboard.html)
+            window.location.href = '../dashboard.html';
+            return;
+          }
+
+          alert('Silakan isi username dan password.');
+        });
+      });
+    </script>
   </body>
 </html>

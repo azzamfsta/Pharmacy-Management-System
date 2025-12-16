@@ -258,7 +258,8 @@
               <span>Get Technical Help</span>
             </a>
             <a
-              href="/login"
+              href="/Login/login.html"
+              onclick="event.preventDefault(); sessionStorage.removeItem('isLoggedIn'); window.location.href='/Login/login.html';"
               class="flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-red-800 hover:text-white transition"
             >
               <i class="fa-solid fa-right-from-bracket w-5"></i>
