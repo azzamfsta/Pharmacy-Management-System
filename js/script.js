@@ -23,6 +23,37 @@ document.addEventListener("DOMContentLoaded", function () {
   initInventoryListPage();
   initAddMedicinePage();
 
+  // Global header search: press Enter in header search or click the magnifying glass to go to search page
+  function performHeaderSearch(q) {
+    const query = (q || '').toString().trim();
+    if (!query) return;
+    // absolute path to search page (works when served from local dev server)
+    window.location.href = '/search.html?q=' + encodeURIComponent(query);
+  }
+
+  // Attach Enter handler to header search inputs
+  const headerSearchInputs = document.querySelectorAll('input[placeholder^="Search for anything here"], input[placeholder*="Search for anything"]');
+  headerSearchInputs.forEach((input) => {
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        performHeaderSearch(input.value);
+      }
+    });
+  });
+
+  // Click handler on magnifier icons near those inputs
+  document.addEventListener('click', function (e) {
+    const el = e.target.closest('.fa-magnifying-glass');
+    if (!el) return;
+    // find nearest input sibling
+    const parent = el.closest('header') || el.parentElement;
+    const input = parent ? parent.querySelector('input[placeholder^="Search for anything here"], input[placeholder*="Search for anything"]') : null;
+    if (input) {
+      performHeaderSearch(input.value);
+    }
+  });
+
   // Ensure sidebar links navigate even if other handlers intercept clicks
   document.addEventListener(
     "click",

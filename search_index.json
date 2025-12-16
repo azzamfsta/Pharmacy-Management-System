@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Dashboard",
+    "url": "/dashboard.html",
+    "snippet": "A quick data overview of the inventory."
+  },
+  {
+    "title": "Inventory Home",
+    "url": "/inventory/inventory_home.html",
+    "snippet": "List of medicines, groups, and inventory summary."
+  },
+  {
+    "title": "Inventory List",
+    "url": "/inventory/inventory_list/inventory_list.html",
+    "snippet": "Full list of medicines; search and filter medicines."
+  },
+  {
+    "title": "Add New Medicine",
+    "url": "/inventory/inventory_list/add_new_medicine.html",
+    "snippet": "Form to add a new medicine to inventory."
+  },
+  {
+    "title": "Medicine Groups",
+    "url": "/inventory/inventory_medicine_groups/inventory_medicine_groups.html",
+    "snippet": "Manage medicine groups and group details."
+  },
+  {
+    "title": "Payment Home",
+    "url": "/Payment/payment_home.html",
+    "snippet": "Overview of payments, pending invoices and quick actions."
+  },
+  {
+    "title": "Payment List",
+    "url": "/Payment/payment_list/Payment_list.html",
+    "snippet": "List of invoices and payment statuses."
+  },
+  {
+    "title": "POS - Process Payment",
+    "url": "/purchase/purchase_pos/pos_entry.html",
+    "snippet": "Point of Sale entry to process new payments."
+  },
+  {
+    "title": "Sales Report",
+    "url": "/reports/sales_report.html",
+    "snippet": "Detailed sales report and analytics."
+  },
+  {
+    "title": "Purchase Report",
+    "url": "/reports/payment_report.html",
+    "snippet": "Purchase and payment reports."
+  },
+  {
+    "title": "Payment Settings",
+    "url": "/Payment/payment_methods/payment_config.html",
+    "snippet": "Manage available payment methods and configuration."
+  },
+  {
+    "title": "Configurations",
+    "url": "/configurations.html",
+    "snippet": "Global application settings."
+  }
+]

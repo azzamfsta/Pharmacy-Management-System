@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search — Pharma One</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <header class="h-16 bg-white shadow-sm flex items-center justify-between px-8 sticky top-0 z-10">
+      <div class="relative w-96">
+        <input id="globalSearchInput" type="text" placeholder="Search for anything here.." class="w-full bg-gray-100 rounded-md py-2 pl-4 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500" />
+        <i id="globalSearchIcon" class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-gray-400 cursor-pointer"></i>
+      </div>
+      <div class="text-sm text-gray-600">Search results</div>
+    </header>
+
+    <main class="p-8">
+      <div class="max-w-4xl mx-auto bg-white rounded shadow p-6">
+        <h1 class="text-2xl font-bold mb-2">Search results</h1>
+        <p id="searchInfo" class="text-sm text-gray-500 mb-4">Loading…</p>
+
+        <div id="results" class="space-y-4"></div>
+      </div>
+    </main>
+
+    <script>
+      function getQueryParam(name) {
+        const params = new URLSearchParams(location.search);
+        return params.get(name) || '';
+      }
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function renderResults(list, q) {
+        const container = document.getElementById('results');
+        const info = document.getElementById('searchInfo');
+        container.innerHTML = '';
+        if (!q) {
+          info.textContent = 'Silakan masukkan kata kunci pencarian di kotak pencarian di atas.';
+          return;
+        }
+
+        if (!list.length) {
+          info.textContent = `No results found for "${escapeHtml(q)}"`;
+          return;
+        }
+
+        info.textContent = `Menampilkan ${list.length} hasil untuk "${escapeHtml(q)}"`;
+
+        list.forEach((item) => {
+          const el = document.createElement('div');
+          el.className = 'p-4 border rounded hover:shadow';
+          el.innerHTML = `
+            <a href="${escapeHtml(item.url)}" class="text-teal-custom font-semibold text-lg">${escapeHtml(item.title)}</a>
+            <div class="text-sm text-gray-600 mt-1">${escapeHtml(item.snippet)}</div>
+            <div class="mt-2 text-xs text-gray-400">${escapeHtml(item.url)}</div>
+          `;
+          container.appendChild(el);
+        });
+      }
+
+      async function runSearch(q) {
+        q = (q || '').trim();
+        const info = document.getElementById('searchInfo');
+        if (!q) {
+          renderResults([], q);
+          return;
+        }
+
+        info.textContent = 'Searching…';
+        try {
+          const res = await fetch('/search_index.json');
+          const index = await res.json();
+
+          // also include medicines from localStorage (if any)
+          let medsIndex = [];
+          try {
+            const medsRaw = localStorage.getItem('pharma_medicines_v1');
+            if (medsRaw) {
+              const meds = JSON.parse(medsRaw);
+              medsIndex = meds.map((m) => ({
+                title: m.name,
+                url: `/inventory/inventory_list/medicine_details.html?id=${encodeURIComponent(m.id)}`,
+                snippet: `Group: ${m.group} • Qty: ${m.qty}`,
+              }));
+            }
+          } catch (e) {
+            // ignore parse errors
+          }
+
+          const combined = index.concat(medsIndex);
+
+          const qLow = q.toLowerCase();
+          const results = combined.filter((item) => {
+            return (
+              item.title.toLowerCase().includes(qLow) ||
+              (item.snippet || '').toLowerCase().includes(qLow) ||
+              (item.url || '').toLowerCase().includes(qLow)
+            );
+          });
+
+          // sort by relevance (title match first)
+          results.sort((a, b) => {
+            const aTitle = a.title.toLowerCase().includes(qLow) ? 0 : 1;
+            const bTitle = b.title.toLowerCase().includes(qLow) ? 0 : 1;
+            return aTitle - bTitle;
+          });
+
+          renderResults(results, q);
+        } catch (err) {
+          info.textContent = 'Error loading search index';
+          console.error(err);
+        }
+      }
+
+      // wire up header input & icon
+      document.addEventListener('DOMContentLoaded', function () {
+        const input = document.getElementById('globalSearchInput');
+        const icon = document.getElementById('globalSearchIcon');
+        const q = getQueryParam('q');
+        input.value = q;
+        runSearch(q);
+
+        input.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            const v = input.value.trim();
+            if (v) location.search = '?q=' + encodeURIComponent(v);
+          }
+        });
+
+        icon.addEventListener('click', function () {
+          const v = input.value.trim();
+          if (v) location.search = '?q=' + encodeURIComponent(v);
+        });
+      });
+    </script>
+
+  </body>
+</html>
